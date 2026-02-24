@@ -118,7 +118,6 @@ body{
   z-index:998;
 }
 
-
 .topnav-inner{
   max-width:1300px;
   margin:auto;
@@ -331,7 +330,6 @@ mark.current{outline:2px solid var(--doj-accent);}
   }
 }
 
-
 /* Keep in-page anchors visible under fixed chrome */
 [id^="sec-"]{ scroll-margin-top: calc(var(--chrome-h, 0px) + 16px); }
 
@@ -387,7 +385,6 @@ mark.current{outline:2px solid var(--doj-accent);}
   font-size:13px;
 }
 
-
 .dept-iob{color:var(--doj-blue);font-weight:700;}
 .status-active{color:#1a7f37;font-weight:700;}
 
@@ -414,8 +411,6 @@ mark.current{outline:2px solid var(--doj-accent);}
 }
 .roster-name{font-weight:700;}
 .roster-role{white-space:nowrap;}
-
-
 
 /* ===== Roster expandable profiles (accordion) ===== */
 .roster-name-btn{
@@ -555,6 +550,134 @@ mark.current{outline:2px solid var(--doj-accent);}
   .roster-avatar{width:110px;height:110px;}
   .profile-avatar{width:220px;height:220px;}
 }
+
+/* === PROFILE TEXT RIGHT PADDING FIX === */
+.profile-top{
+  display:flex;
+  align-items:center;
+  gap:60px;
+}
+
+.profile-meta{
+  padding-right:120px;
+  margin-left:0;
+}
+
+/* === OPTION 2: "Bureau Intelligence" section header (Alosztály állománytábla) === */
+.bureau-hero{
+  position: relative;
+  padding: 28px 26px 22px 26px;
+  border: 1px solid #e6e6e6;
+  border-radius: 14px;
+  background:
+    radial-gradient(1200px 220px at 10% 0%, rgba(0,94,162,.10), transparent 60%),
+    linear-gradient(135deg, rgba(16,42,67,.06), rgba(255,255,255,0) 55%);
+  box-shadow: 0 10px 28px rgba(0,0,0,.06);
+  overflow: hidden;
+  margin-bottom: 18px;
+}
+
+.bureau-hero::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:10px;
+  background: linear-gradient(180deg, #005ea2, #0b2e4f);
+}
+
+.bureau-hero::after{
+  content:"";
+  position:absolute;
+  right:-90px;
+  top:-110px;
+  width:260px;
+  height:260px;
+  border-radius: 50%;
+  border: 2px dashed rgba(16,42,67,.12);
+  opacity:.65;
+  pointer-events:none;
+}
+
+.bureau-hero .hero-kicker{
+  font-family: Arial, sans-serif;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  font-size: 12px;
+  color: #2b3a4a;
+  opacity:.9;
+  margin: 0 0 8px 0;
+}
+
+.bureau-hero .hero-title{
+  margin: 0;
+  font-size: 44px;
+  line-height: 1.08;
+}
+
+.bureau-hero .hero-sub{
+  margin: 10px 0 0 0;
+  max-width: 820px;
+  font-size: 15px;
+  color: #213547;
+  font-family: Arial, sans-serif;
+  opacity:.95;
+}
+
+.bureau-hero .hero-meta{
+  display:flex;
+  flex-wrap: wrap;
+  align-items:center;
+  gap:10px;
+  margin-top: 16px;
+  font-family: Arial, sans-serif;
+}
+
+.bureau-pill{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  border:1px solid #d9d9d9;
+  background:#ffffff;
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: 13px;
+  color:#102a43;
+  box-shadow: 0 3px 10px rgba(0,0,0,.05);
+}
+
+.bureau-dot{
+  width:10px;
+  height:10px;
+  border-radius: 50%;
+  background:#2e7d32;
+  box-shadow: 0 0 0 3px rgba(46,125,50,.12);
+}
+
+.bureau-dot.blue{
+  background:#005ea2;
+  box-shadow: 0 0 0 3px rgba(0,94,162,.12);
+}
+
+.bureau-divider{
+  height:1px;
+  background: linear-gradient(90deg, rgba(0,94,162,.0), rgba(0,94,162,.35), rgba(0,94,162,.0));
+  margin: 18px 0 0 0;
+}
+
+
+/* === ROSTER PAGE LAYOUT: remove quick actions + center content === */
+#page-allomanytabla .main{
+  justify-content: center;
+}
+
+#page-allomanytabla .content{
+  max-width: 980px;
+  width: 100%;
+  margin: 0 auto;
+}
+
 </style>
 </head>
 <body>
@@ -922,12 +1045,21 @@ mark.current{outline:2px solid var(--doj-accent);}
 </section>
 <section aria-label="Alosztály állománytábla" class="page" id="page-allomanytabla">
 <div class="main">
-<div class="sidebar">
-<h3>Gyors műveletek</h3>
-<a href="#tabla">Állománytábla</a>
-</div>
 <div class="content">
-<h1>Alosztály állománytábla</h1>
+<div class="bureau-hero" aria-label="Alosztály állománytábla fejléc">
+  <div class="hero-kicker">Internal Oversight Bureau • Personnel Registry</div>
+  <h1 class="hero-title">Alosztály állománytábla</h1>
+  <p class="hero-sub">
+    Operatív állomány és vezetői struktúra – kattints a névre a részletes profilkártyához.
+  </p>
+  <div class="hero-meta">
+    <span class="bureau-pill"><span class="bureau-dot"></span>Státusz: Aktív nyilvántartás</span>
+    <span class="bureau-pill"><span class="bureau-dot blue"></span>Egység: IOB</span>
+    
+  </div>
+  <div class="bureau-divider" aria-hidden="true"></div>
+</div>
+
 <h2 id="tabla">Állománytábla</h2>
 <table aria-label="Állománytábla" class="roster-table">
 <thead>
@@ -1106,7 +1238,7 @@ mark.current{outline:2px solid var(--doj-accent);}
   const countEl = document.getElementById("findCount");
   const infoContent = document.getElementById("infoContent");
 
-  let originalHTML = null;
+  let originalHTML = infoContent ? infoContent.innerHTML : null;
   let matches = [];
   let current = -1;
 
@@ -1120,6 +1252,8 @@ mark.current{outline:2px solid var(--doj-accent);}
     if(infoContent && originalHTML !== null){
       infoContent.innerHTML = originalHTML;
     }
+    // Re-init scroll reveal after restoring pristine HTML
+    initScrollAnimFor(infoContent);
     matches = [];
     current = -1;
     updateCount();
@@ -1139,10 +1273,10 @@ mark.current{outline:2px solid var(--doj-accent);}
 
   function buildHighlights(query){
     if(!infoContent) return;
-    if(originalHTML === null) originalHTML = infoContent.innerHTML;
-
     // clear + restore original each time (so we don't nest marks)
     infoContent.innerHTML = originalHTML;
+    // Re-init scroll reveal on the restored DOM
+    initScrollAnimFor(infoContent);
     matches = [];
     current = -1;
 
@@ -1153,6 +1287,8 @@ mark.current{outline:2px solid var(--doj-accent);}
     }
     const qLower = q.toLowerCase();
 
+    // Collect text nodes FIRST (important: don't mutate DOM while walking)
+    const textNodes = [];
     const walker = document.createTreeWalker(infoContent, NodeFilter.SHOW_TEXT, {
       acceptNode(node){
         if(!node.nodeValue || !node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
@@ -1166,15 +1302,19 @@ mark.current{outline:2px solid var(--doj-accent);}
 
     let node;
     while((node = walker.nextNode())){
-      const text = node.nodeValue;
-      const lower = text.toLowerCase();
+      textNodes.push(node);
+    }
 
-      let start = 0;
-      let idx = lower.indexOf(qLower, start);
-      if(idx === -1) continue;
+    textNodes.forEach(textNode => {
+      const text = textNode.nodeValue;
+      const lower = text.toLowerCase();
+      if(!lower.includes(qLower)) return;
 
       const frag = document.createDocumentFragment();
-      while(idx !== -1){
+      let start = 0;
+      let idx;
+
+      while((idx = lower.indexOf(qLower, start)) !== -1){
         if(idx > start){
           frag.appendChild(document.createTextNode(text.slice(start, idx)));
         }
@@ -1182,15 +1322,15 @@ mark.current{outline:2px solid var(--doj-accent);}
         mark.textContent = text.slice(idx, idx + q.length);
         frag.appendChild(mark);
         matches.push(mark);
-
         start = idx + q.length;
-        idx = lower.indexOf(qLower, start);
       }
+
       if(start < text.length){
         frag.appendChild(document.createTextNode(text.slice(start)));
       }
-      node.parentNode.replaceChild(frag, node);
-    }
+
+      textNode.parentNode.replaceChild(frag, textNode);
+    });
 
     if(matches.length){
       current = 0;
@@ -1268,7 +1408,6 @@ mark.current{outline:2px solid var(--doj-accent);}
   window.addEventListener("load", updateChromeHeights);
 
 })();
-
 
 // ===== Roster expandable profiles (accordion) =====
 (function(){
