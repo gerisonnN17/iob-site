@@ -392,7 +392,12 @@ mark.current{outline:2px solid var(--doj-accent);}
 .status-active{color:#1a7f37;font-weight:700;}
 
 /* Roster (állománytábla) */
-.roster-table{width:100%;border-collapse:separate;border-spacing:0;font-family:Arial, sans-serif;}
+.roster-table{
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0;
+  font-family:Arial, sans-serif;
+}
 .roster-table thead th{
   text-align:left;
   border-bottom:1px solid var(--doj-border);
@@ -403,18 +408,227 @@ mark.current{outline:2px solid var(--doj-accent);}
 }
 .roster-table tbody td{
   border-bottom:1px solid var(--doj-border);
-  padding:12px 12px;
+  padding:16px 12px;
   vertical-align:middle;
 }
-.roster-table tbody tr:hover{background:rgba(11,46,79,0.035);}
-.roster-avatar{
-  width:56px;height:56px;object-fit:cover;border-radius:14px;
-  border:1px solid rgba(0,0,0,.08);
-  box-shadow:0 6px 18px rgba(0,0,0,.08);
+.roster-table tbody tr{
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
 }
-.roster-name{font-weight:700;}
+.roster-table tbody tr:hover{
+  background:rgba(11,46,79,0.045);
+  transform: translateY(-3px);
+  box-shadow: 0 14px 34px rgba(0,0,0,.14);
+}
+.roster-photo-cell{
+  width:190px;
+  padding-left:14px !important;
+  padding-right:14px !important;
+}
+.roster-avatar{
+  width:160px;
+  height:160px;
+  object-fit:cover;
+  border-radius:20px;
+  border:4px solid var(--doj-accent);
+  box-shadow:
+    0 0 0 4px #ffffff,
+    0 14px 28px rgba(0,0,0,.28);
+}
+.roster-name{font-weight:800; letter-spacing:.2px;}
 .roster-role{white-space:nowrap;}
 
+/* IOB + státusz kiemelés */
+.dept-iob{color:var(--doj-accent);font-weight:800;}
+.status-active{
+  display:inline-block;
+  padding:6px 12px;
+  border-radius:999px;
+  background:#1f7a1f;
+  color:#ffffff;
+  font-weight:800;
+  letter-spacing:.3px;
+}
+
+/* Responsive: table -> stacked ID cards */
+@media (max-width: 760px){
+  .roster-table thead{display:none;}
+  .roster-table, .roster-table tbody, .roster-table tr, .roster-table td{display:block; width:100%;}
+  .roster-table tbody tr{
+    background:rgba(11,46,79,0.03);
+    border:1px solid rgba(0,0,0,.08);
+    border-radius:18px;
+    padding:16px;
+    margin:14px 0;
+    box-shadow: 0 10px 26px rgba(0,0,0,.12);
+    transform:none !important;
+  }
+  .roster-table tbody td{border:0 !important; padding:8px 0;}
+  .roster-photo-cell{width:100%; padding:0 !important; margin-bottom:10px;}
+  .roster-avatar{width:220px; height:220px; border-radius:22px;}
+  .roster-role{white-space:normal;}
+}
+
+
+/* ===== Person Modal (Profile Popup) ===== */
+.person-link{
+  background: none;
+  border: 0;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: rgba(11,61,145,.35);
+  text-underline-offset: 3px;
+}
+.person-link:hover{ text-decoration-color: rgba(11,61,145,.85); }
+
+.modal-overlay{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.65);
+  z-index: 5000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 22px;
+}
+
+.modal-overlay.show{ display: flex; }
+
+.modal{
+  width: min(860px, 96vw);
+  max-height: 88vh;
+  overflow: auto;
+  background: #0c131c;
+  color: #e9eef6;
+  border-radius: 18px;
+  border: 2px solid rgba(0, 255, 204, .35);
+  box-shadow: 0 18px 50px rgba(0,0,0,.55);
+}
+
+.modal-header{
+  position: sticky;
+  top: 0;
+  background: linear-gradient(180deg, rgba(0,255,204,.22), rgba(12,19,28,0));
+  padding: 18px 18px 12px 18px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-title{
+  display:flex;
+  gap:14px;
+  align-items:center;
+  min-width: 0;
+}
+
+.modal-avatar{
+  width: 84px;
+  height: 84px;
+  border-radius: 16px;
+  object-fit: cover;
+  border: 3px solid rgba(0,255,204,.55);
+  box-shadow: 0 10px 24px rgba(0,0,0,.35);
+}
+
+.modal-title h2{
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.2;
+  letter-spacing: .2px;
+}
+.modal-sub{
+  margin-top: 6px;
+  font-size: 13px;
+  opacity: .85;
+  display:flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+}
+
+.pill{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.10);
+  font-weight: 600;
+}
+
+.pill .dot{
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #34d399;
+  box-shadow: 0 0 0 3px rgba(52,211,153,.18);
+}
+
+.modal-close{
+  background: rgba(255,255,255,.08);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 12px;
+  padding: 10px 12px;
+  cursor: pointer;
+  font-weight: 700;
+}
+.modal-close:hover{ background: rgba(255,255,255,.12); }
+
+.modal-body{
+  padding: 16px 18px 20px 18px;
+}
+
+.modal-grid{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+@media (max-width: 720px){
+  .modal-grid{ grid-template-columns: 1fr; }
+  .modal-avatar{ width: 72px; height: 72px; }
+}
+
+.modal-card{
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: 14px;
+  padding: 12px 12px;
+}
+
+.modal-card h3{
+  margin: 0 0 10px 0;
+  font-size: 14px;
+  letter-spacing: .6px;
+  text-transform: uppercase;
+  color: rgba(0,255,204,.92);
+}
+
+.kv{
+  display:grid;
+  grid-template-columns: 160px 1fr;
+  gap: 10px 12px;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+@media (max-width: 720px){
+  .kv{ grid-template-columns: 1fr; }
+  .kv .k{ opacity: .8; font-weight: 700; }
+}
+
+.k{ opacity: .78; }
+.v{ font-weight: 600; }
+
+.modal-note{
+  margin-top: 12px;
+  font-size: 13px;
+  opacity: .82;
+}
 </style>
 </head>
 <body>
@@ -788,7 +1002,7 @@ mark.current{outline:2px solid var(--doj-accent);}
       <table class="roster-table" aria-label="Állománytábla">
         <thead>
           <tr>
-            <th style="width:72px;">Kép</th>
+            <th style="width:190px;">Kép</th>
             <th>Név</th>
             <th>Beosztás</th>
             <th>Osztály</th>
@@ -797,22 +1011,22 @@ mark.current{outline:2px solid var(--doj-accent);}
         </thead>
         <tbody>
           <tr>
-            <td><img class="roster-avatar" src="justin.png" alt="Justin D. Scully profilkép"></td>
-            <td class="roster-name">Justin D. Scully</td>
+            <td class="roster-photo-cell"><img class="roster-avatar" src="justin.png" alt="Justin D. Scully profilkép"></td>
+            <td class="roster-name"><button type="button" class="person-link" data-person="justin" aria-haspopup="dialog">Justin D. Scully</button></td>
             <td class="roster-role">Director of Internal Oversight</td>
             <td><span class="dept-iob">IOB</span></td>
             <td><span class="status-active">Aktív</span></td>
           </tr>
           <tr>
-            <td><img class="roster-avatar" src="jacob.png" alt="Jacob D. Scully profilkép"></td>
-            <td class="roster-name">Jacob D. Scully</td>
+            <td class="roster-photo-cell"><img class="roster-avatar" src="jacob.png" alt="Jacob D. Scully profilkép"></td>
+            <td class="roster-name"><button type="button" class="person-link" data-person="jacob" aria-haspopup="dialog">Jacob D. Scully</button></td>
             <td class="roster-role">Director of Internal Oversight</td>
             <td><span class="dept-iob">IOB</span></td>
             <td><span class="status-active">Aktív</span></td>
           </tr>
           <tr>
-            <td><img class="roster-avatar" src="rae.png" alt="Bailey Rae Brady profilkép"></td>
-            <td class="roster-name">Bailey Rae Brady</td>
+            <td class="roster-photo-cell"><img class="roster-avatar" src="rae.png" alt="Bailey Rae Brady profilkép"></td>
+            <td class="roster-name"><button type="button" class="person-link" data-person="rae" aria-haspopup="dialog">Bailey Rae Brady</button></td>
             <td class="roster-role">Deputy Director</td>
             <td><span class="dept-iob">IOB</span></td>
             <td><span class="status-active">Aktív</span></td>
@@ -1136,5 +1350,206 @@ mark.current{outline:2px solid var(--doj-accent);}
 })();
 </script>
 
+
+<!-- Person Profile Modal -->
+<div id="personModalOverlay" class="modal-overlay" role="presentation" aria-hidden="true">
+  <div id="personModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="personModalTitle">
+    <div class="modal-header">
+      <div class="modal-title">
+        <img id="personModalAvatar" class="modal-avatar" src="" alt="">
+        <div style="min-width:0">
+          <h2 id="personModalTitle">Profile</h2>
+          <div class="modal-sub" id="personModalSub"></div>
+        </div>
+      </div>
+      <button type="button" class="modal-close" id="personModalClose" aria-label="Bezárás">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-grid">
+        <div class="modal-card">
+          <h3>Service</h3>
+          <div class="kv" id="personModalService"></div>
+        </div>
+        <div class="modal-card">
+          <h3>Biography</h3>
+          <div class="kv" id="personModalBio"></div>
+          <div class="modal-note" id="personModalBioNote"></div>
+        </div>
+        <div class="modal-card" style="grid-column:1/-1">
+          <h3>Notes</h3>
+          <div class="kv" id="personModalNotes"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const people = {
+    justin: {
+      name: "Justin D. Scully",
+      avatar: "justin.png",
+      dept: "IOB",
+      role: "Director of Internal Oversight",
+      status: "Aktív",
+      service: {
+        "Department": "Internal Oversight Bureau (IOB)",
+        "Position": "Director of Internal Oversight",
+        "Status": "Aktív"
+      },
+      bio: {
+        "Summary": "Rövid összefoglaló ide kerül (pár sorban).",
+        "Specialization": "Belső vizsgálatok, fegyelmi eljárások, integritás-ellenőrzés."
+      },
+      notes: {
+        "Authority": "Vizsgálatok engedélyezése és lezárása; jelentések jóváhagyása.",
+        "Confidentiality": "Az ügyek és bizonyítékok bizalmas kezelése kötelező."
+      }
+    },
+    jacob: {
+      name: "Jacob D. Scully",
+      avatar: "jacob.png",
+      dept: "IOB",
+      role: "Director of Internal Oversight",
+      status: "Aktív",
+      service: {
+        "Department": "Internal Oversight Bureau (IOB)",
+        "Position": "Director of Internal Oversight",
+        "Status": "Aktív"
+      },
+      bio: {
+        "Summary": "Rövid összefoglaló ide kerül (pár sorban).",
+        "Specialization": "Komplex ügyek felügyelete, riportok és megfelelőségi ellenőrzés."
+      },
+      notes: {
+        "Authority": "Kiemelt ügyek koordinálása; parancsnoki jelentések előkészítése.",
+        "Confidentiality": "Az IOB eljárások zárt körben, bizalmas jelleggel zajlanak."
+      }
+    },
+    rae: {
+      name: "Bailey Rae Brady",
+      avatar: "rae.png",
+      dept: "IOB",
+      role: "Deputy Director",
+      status: "Aktív",
+      service: {
+        "Department": "Internal Oversight Bureau (IOB)",
+        "Position": "Deputy Director",
+        "Status": "Aktív"
+      },
+      bio: {
+        "Summary": "Rövid összefoglaló ide kerül (pár sorban).",
+        "Specialization": "Operatív koordináció, investigatorok felügyelete, minőségellenőrzés."
+      },
+      notes: {
+        "Authority": "A Director távollétében teljes jogkörrel eljár.",
+        "Conduct": "Összeférhetetlenség esetén az ügyet haladéktalanul jelenteni kell."
+      }
+    }
+  };
+
+  const overlay = document.getElementById("personModalOverlay");
+  const modal = document.getElementById("personModal");
+  const closeBtn = document.getElementById("personModalClose");
+
+  const titleEl = document.getElementById("personModalTitle");
+  const avatarEl = document.getElementById("personModalAvatar");
+  const subEl = document.getElementById("personModalSub");
+  const serviceEl = document.getElementById("personModalService");
+  const bioEl = document.getElementById("personModalBio");
+  const bioNoteEl = document.getElementById("personModalBioNote");
+  const notesEl = document.getElementById("personModalNotes");
+
+  let lastFocus = null;
+
+  function kvToHtml(obj){
+    return Object.entries(obj).map(([k,v]) =>
+      `<div class="k">${escapeHtml(k)}</div><div class="v">${escapeHtml(v)}</div>`
+    ).join("");
+  }
+
+  function escapeHtml(str){
+    return String(str).replace(/[&<>"']/g, s => ({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"":"&quot;","'":"&#39;"
+    }[s]));
+  }
+
+  function openPerson(id){
+    const p = people[id];
+    if(!p) return;
+
+    lastFocus = document.activeElement;
+
+    titleEl.textContent = p.name;
+    avatarEl.src = p.avatar;
+    avatarEl.alt = p.name + " portré";
+
+    // sub pills
+    subEl.innerHTML = `
+      <span class="pill"><span class="dot"></span>${escapeHtml(p.status)}</span>
+      <span class="pill">${escapeHtml(p.dept)}</span>
+      <span class="pill">${escapeHtml(p.role)}</span>
+    `;
+
+    serviceEl.innerHTML = kvToHtml(p.service);
+    bioEl.innerHTML = kvToHtml(p.bio);
+    bioNoteEl.textContent = "Tipp: ezeket a mezőket később bővíthetjük teljes, részletes adatlapra (pl. születési dátum, azonosító, kapcsolatok).";
+    notesEl.innerHTML = kvToHtml(p.notes);
+
+    overlay.classList.add("show");
+    overlay.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+
+    // focus close
+    closeBtn.focus();
+  }
+
+  function closePerson(){
+    overlay.classList.remove("show");
+    overlay.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+    if(lastFocus && typeof lastFocus.focus === "function") lastFocus.focus();
+  }
+
+  // Expose a tiny global hook so clicks always work (even if event delegation is affected)
+  window.openPersonModal = function(id){
+    openPerson(id);
+  };
+
+  // Click name -> open (direct binding + delegation for robustness)
+  document.querySelectorAll(".person-link").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      openPerson(btn.getAttribute("data-person"));
+    });
+  });
+
+  document.addEventListener("click", (e) => {
+    const btn = e.target.closest(".person-link");
+    if(btn){
+      const id = btn.getAttribute("data-person");
+      openPerson(id);
+    }
+  });
+    if(btn){
+      const id = btn.getAttribute("data-person");
+      openPerson(id);
+    }
+  });
+
+  // Close handlers
+  closeBtn.addEventListener("click", closePerson);
+  overlay.addEventListener("click", (e) => {
+    if(e.target === overlay) closePerson();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if(!overlay.classList.contains("show")) return;
+    if(e.key === "Escape") closePerson();
+  });
+})();
+</script>
 </body>
 </html>
