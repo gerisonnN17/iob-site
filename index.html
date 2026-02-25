@@ -678,6 +678,898 @@ mark.current{outline:2px solid var(--doj-accent);}
   margin: 0 auto;
 }
 
+
+
+
+/* === ÜGYEK: Case Dashboard (fájlok nélkül) === */
+#page-ugyek .sidebar select,
+#page-ugyek .sidebar input[type="search"]{
+  width:100%;
+  border:1px solid var(--doj-border);
+  border-radius:6px;
+  padding:10px 10px;
+  font-size:14px;
+  background:#ffffff;
+  font-family: Arial, sans-serif;
+}
+
+#page-ugyek .sidebar h3{ margin-top: 18px; }
+#page-ugyek .side-sep{ height:1px; background:var(--doj-border); margin:12px 0; }
+
+.cases-hero{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:14px;
+  padding: 16px 16px;
+  border:1px solid rgba(0,0,0,.08);
+  border-radius:12px;
+  background:
+    radial-gradient(900px 220px at 0% 0%, rgba(0,94,162,.10), transparent 55%),
+    linear-gradient(180deg, rgba(255,255,255,1), rgba(16,42,67,.03));
+  box-shadow: 0 10px 28px rgba(0,0,0,.06);
+  margin: 10px 0 14px;
+}
+.cases-hero-title{
+  font-family: Arial, sans-serif;
+  font-weight: 900;
+  color: var(--doj-blue);
+  font-size: 16px;
+  letter-spacing:.2px;
+}
+.cases-hero-sub{
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  color: rgba(0,0,0,.70);
+  margin-top: 6px;
+  max-width: 780px;
+}
+.cases-hero-badges{ display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; }
+
+.cases-stats{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap:10px;
+  margin: 12px 0 14px;
+}
+.stat-card{
+  padding: 12px 12px;
+  border:1px solid rgba(0,0,0,.10);
+  border-radius:12px;
+  background:#ffffff;
+  box-shadow: 0 6px 16px rgba(0,0,0,.06);
+}
+.stat-num{
+  font-family: Arial, sans-serif;
+  font-weight: 900;
+  font-size: 22px;
+  color:#102a43;
+  line-height: 1.1;
+}
+.stat-label{
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color:#4b5563;
+  margin-top: 6px;
+}
+
+.cases-grid{
+  display:grid;
+  grid-template-columns: 1.25fr .95fr;
+  gap:14px;
+  align-items:start;
+}
+
+.cases-panel, .dossier-panel{
+  border:1px solid rgba(0,0,0,.10);
+  border-radius:14px;
+  background:#ffffff;
+  box-shadow: 0 10px 24px rgba(0,0,0,.08);
+  overflow:hidden;
+}
+
+.panel-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:12px;
+  padding: 14px 14px;
+  background: rgba(16,42,67,.04);
+  border-bottom:1px solid rgba(0,0,0,.08);
+}
+.panel-title{
+  font-family: Arial, sans-serif;
+  font-weight: 900;
+  color:#102a43;
+}
+.panel-sub{
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  color: rgba(0,0,0,.65);
+  margin-top: 4px;
+}
+.dossier-mini{ display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; }
+
+.cases-table-wrap{ overflow:auto; }
+.cases-table{
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0;
+  font-family: Arial, sans-serif;
+}
+.cases-table thead th{
+  text-align:left;
+  border-bottom:1px solid var(--doj-border);
+  padding:12px 12px;
+  font-weight:800;
+  color:#111;
+  background:rgba(11,46,79,0.03);
+  white-space:nowrap;
+}
+.cases-table tbody td{
+  border-bottom:1px solid var(--doj-border);
+  padding:12px 12px;
+  vertical-align:top;
+}
+.cases-table tbody tr:hover{ background: rgba(11,46,79,0.035); }
+.cases-table tbody tr.is-active{ background: rgba(0,94,162,0.06); }
+.case-title-cell{
+  font-weight: 800;
+  color:#102a43;
+}
+.case-sub-cell{
+  font-size: 12px;
+  color: rgba(0,0,0,.65);
+  margin-top: 4px;
+}
+.pill{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  border:1px solid rgba(0,0,0,.10);
+  border-radius:999px;
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing:.4px;
+  font-family: Arial, sans-serif;
+  white-space:nowrap;
+}
+.pill .dot{
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:#64748b;
+  box-shadow: 0 0 0 3px rgba(100,116,139,.12);
+}
+.pill.status-active{ background: rgba(46,125,50,.08); color:#1b5e20; border-color: rgba(46,125,50,.20); }
+.pill.status-active .dot{ background:#2e7d32; box-shadow: 0 0 0 3px rgba(46,125,50,.12); }
+.pill.status-in_review{ background: rgba(0,94,162,.08); color:#0b2e4f; border-color: rgba(0,94,162,.20); }
+.pill.status-in_review .dot{ background:#005ea2; box-shadow: 0 0 0 3px rgba(0,94,162,.12); }
+.pill.status-appeal{ background: rgba(197,161,0,.10); color:#7a5a00; border-color: rgba(197,161,0,.25); }
+.pill.status-appeal .dot{ background:#c5a100; box-shadow: 0 0 0 3px rgba(197,161,0,.14); }
+.pill.status-closed{ background: rgba(100,116,139,.10); color:#334155; border-color: rgba(100,116,139,.25); }
+.pill.status-on_hold{ background: rgba(176,0,32,.08); color:#7a0016; border-color: rgba(176,0,32,.18); }
+.pill.status-on_hold .dot{ background:#b00020; box-shadow: 0 0 0 3px rgba(176,0,32,.12); }
+
+.pill.pri-low{ background: rgba(100,116,139,.08); color:#334155; }
+.pill.pri-medium{ background: rgba(0,94,162,.08); color:#0b2e4f; }
+.pill.pri-high{ background: rgba(176,0,32,.08); color:#7a0016; border-color: rgba(176,0,32,.18); }
+.pill.pri-high .dot{ background:#b00020; box-shadow: 0 0 0 3px rgba(176,0,32,.12); }
+
+.dossier-body{
+  padding: 14px;
+  font-family: Arial, sans-serif;
+}
+.dossier-title{
+  font-weight: 900;
+  color:#102a43;
+  font-size: 16px;
+}
+.dossier-meta{
+  margin-top: 6px;
+  font-size: 12px;
+  color: rgba(0,0,0,.70);
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+.dossier-grid{
+  margin-top: 12px;
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:10px;
+}
+.dossier-box{
+  border:1px solid rgba(0,0,0,.08);
+  border-radius:12px;
+  padding: 10px 12px;
+  background: rgba(16,42,67,.03);
+}
+.dossier-box h4{
+  margin:0 0 6px 0;
+  font-size: 12px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color: rgba(0,0,0,.60);
+}
+.dossier-box p{ margin:0; font-size: 13px; color: rgba(0,0,0,.78); }
+
+.dossier-section{
+  margin-top: 12px;
+  border-top:1px solid rgba(0,0,0,.08);
+  padding-top: 12px;
+}
+.dossier-section h3{
+  margin: 0 0 8px 0;
+  font-size: 14px;
+}
+.timeline{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.tl-item{
+  border:1px solid rgba(0,0,0,.08);
+  border-radius:12px;
+  padding: 10px 12px;
+  background:#ffffff;
+}
+.tl-top{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  font-size: 12px;
+  color: rgba(0,0,0,.65);
+}
+.tl-title{ font-weight: 900; color:#102a43; margin-top: 6px; }
+.tl-note{ margin-top: 6px; font-size: 13px; color: rgba(0,0,0,.78); }
+
+.evidence-list{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.ev-item{
+  border:1px solid rgba(0,0,0,.08);
+  border-radius:12px;
+  padding: 10px 12px;
+  background:#ffffff;
+}
+.ev-head{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  font-size: 12px;
+  color: rgba(0,0,0,.65);
+}
+.ev-title{ font-weight: 900; color:#102a43; margin-top: 6px; }
+.ev-desc{ margin-top: 6px; font-size: 13px; color: rgba(0,0,0,.78); }
+
+.actions-list{ display:flex; flex-direction:column; gap:8px; }
+.ac-item{
+  border:1px solid rgba(0,0,0,.08);
+  border-radius:12px;
+  padding: 10px 12px;
+  background:#ffffff;
+}
+.ac-title{ font-weight: 900; color:#102a43; }
+.ac-desc{ margin-top: 6px; font-size: 13px; color: rgba(0,0,0,.78); }
+
+@media (max-width: 1100px){
+  .cases-grid{ grid-template-columns: 1fr; }
+  .cases-stats{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cases-hero{ flex-direction:column; align-items:stretch; }
+  .cases-hero-badges{ justify-content:flex-start; }
+  .dossier-grid{ grid-template-columns: 1fr; }
+}
+
+
+/* === ÜGYEK UX FIX: egyben átlátható oldal (nincs "két rész") === */
+#page-ugyek .content{
+  max-width: 1300px;
+}
+
+#page-ugyek .main{
+  align-items: flex-start;
+}
+
+/* A hero + stat blokkok legyenek kompaktak, ne tolják le a tartalmat */
+#page-ugyek .cases-hero{
+  margin: 8px 0 10px;
+  padding: 14px 14px;
+}
+#page-ugyek .cases-stats{
+  margin: 10px 0 12px;
+}
+
+/* A listát és dossziét azonnal egymás után, egy "folyó" layoutban */
+#page-ugyek .cases-grid{
+  grid-template-columns: minmax(560px, 1.35fr) minmax(380px, 0.95fr);
+  align-items: start;
+}
+
+/* NINCS sticky + NINCS belső scroll: az egész oldal egyben görgethető */
+#page-ugyek .dossier-panel{
+  position: static;
+  top: auto;
+}
+#page-ugyek .dossier-body{
+  max-height: none;
+  overflow: visible;
+}
+
+/* Táblázat: csak vízszintes overflow, hogy ne törje szét */
+#page-ugyek .cases-table-wrap{
+  overflow: visible;
+  max-width: 100%;
+}
+
+/* Kattintható sorok jelzése */
+#page-ugyek .cases-table tbody tr{
+  cursor: pointer;
+}
+#page-ugyek .cases-table tbody tr td:first-child strong{
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(0,94,162,.35);
+}
+
+/* Mobil: egypanel + kártyás táblázat */
+@media (max-width: 900px){
+  #page-ugyek .cases-grid{
+    grid-template-columns: 1fr;
+  }
+  #page-ugyek .cases-table thead{
+    display:none;
+  }
+  #page-ugyek .cases-table,
+  #page-ugyek .cases-table tbody,
+  #page-ugyek .cases-table tr,
+  #page-ugyek .cases-table td{
+    display:block;
+    width:100%;
+  }
+  #page-ugyek .cases-table tbody tr{
+    border-bottom: 0;
+    margin: 10px 10px 12px;
+    border:1px solid rgba(0,0,0,.10);
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0,0,0,.06);
+    overflow:hidden;
+    background:#fff;
+  }
+  #page-ugyek .cases-table tbody td{
+    border-bottom: 1px solid rgba(0,0,0,.08);
+    padding: 10px 12px;
+  }
+  #page-ugyek .cases-table tbody td:last-child{
+    border-bottom: 0;
+  }
+  #page-ugyek .cases-table tbody td::before{
+    content: attr(data-label);
+    display:block;
+    font-size: 11px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: rgba(0,0,0,.55);
+    margin-bottom: 6px;
+    font-family: Arial, sans-serif;
+    font-weight: 800;
+  }
+}
+
+#page-ugyek .content{
+  max-width: 1300px;
+}
+
+#page-ugyek .main{
+  align-items: flex-start;
+}
+
+/* Kétpaneles layout stabil szélességekkel */
+#page-ugyek .cases-grid{
+  grid-template-columns: minmax(560px, 1.35fr) minmax(380px, 0.95fr);
+}
+
+/* Dosszié legyen "látható", ne csússzon el: sticky + belső scroll */
+#page-ugyek .dossier-panel{
+  position: sticky;
+  top: calc(var(--chrome-h, 0px) + 16px);
+}
+
+#page-ugyek .dossier-body{
+  max-height: calc(100vh - var(--chrome-h, 0px) - 90px);
+  overflow: auto;
+}
+
+/* Táblázat wrap: ne törje szét a layoutot */
+#page-ugyek .cases-table-wrap{
+  overflow: visible;
+  max-width: 100%;
+}
+
+/* Kattintható sorok vizuális jelzése */
+#page-ugyek .cases-table tbody tr{
+  cursor: pointer;
+}
+#page-ugyek .cases-table tbody tr td:first-child strong{
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(0,94,162,.35);
+}
+
+/* Mobil: egypanel + "kártyás" táblázat */
+@media (max-width: 900px){
+  #page-ugyek .cases-grid{
+    grid-template-columns: 1fr;
+  }
+  #page-ugyek .dossier-panel{
+    position: static;
+  }
+  #page-ugyek .cases-table thead{
+    display:none;
+  }
+  #page-ugyek .cases-table,
+  #page-ugyek .cases-table tbody,
+  #page-ugyek .cases-table tr,
+  #page-ugyek .cases-table td{
+    display:block;
+    width:100%;
+  }
+  #page-ugyek .cases-table tbody tr{
+    border-bottom: 0;
+    margin: 10px 10px 12px;
+    border:1px solid rgba(0,0,0,.10);
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0,0,0,.06);
+    overflow:hidden;
+    background:#fff;
+  }
+  #page-ugyek .cases-table tbody td{
+    border-bottom: 1px solid rgba(0,0,0,.08);
+    padding: 10px 12px;
+  }
+  #page-ugyek .cases-table tbody td:last-child{
+    border-bottom: 0;
+  }
+  #page-ugyek .cases-table tbody td::before{
+    content: attr(data-label);
+    display:block;
+    font-size: 11px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: rgba(0,0,0,.55);
+    margin-bottom: 6px;
+    font-family: Arial, sans-serif;
+    font-weight: 800;
+  }
+}
+
+
+/* === ÜGYEK: egyoszlopos, felhasználóbarát elrendezés === */
+#page-ugyek .sidebar{ display:none; }
+#page-ugyek .main{ justify-content: center; }
+#page-ugyek .content{ max-width: 1300px; width:100%; margin: 0 auto; }
+
+#page-ugyek .cases-toolbar{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:12px;
+  margin: 10px 0 12px;
+  font-family: Arial, sans-serif;
+}
+#page-ugyek .cases-toolbar input,
+#page-ugyek .cases-toolbar select{
+  border:1px solid var(--doj-border);
+  border-radius:8px;
+  padding:10px 10px;
+  font-size:14px;
+  background:#fff;
+  min-width: 260px;
+}
+#page-ugyek .toolbar-left{ flex: 1 1 auto; }
+#page-ugyek .toolbar-left input{ width:100%; max-width: 620px; }
+#page-ugyek .toolbar-right{ flex: 0 0 auto; }
+#page-ugyek .toolbar-label{
+  display:block;
+  font-size: 12px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color: rgba(0,0,0,.60);
+  margin-bottom: 6px;
+  font-weight: 800;
+}
+
+
+@media (max-width: 900px){
+  #page-ugyek .cases-toolbar{
+    flex-direction:column;
+    align-items:stretch;
+  }
+  #page-ugyek .cases-toolbar input,
+  #page-ugyek .cases-toolbar select{
+    width:100%;
+    min-width: 0;
+  }
+}
+
+
+/* === ÜGYEK: középre igazítás + scrollbar eltüntetés === */
+#page-ugyek .main{
+  justify-content: center;
+}
+
+#page-ugyek .content{
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+#page-ugyek .cases-panel{
+  margin: 0 auto 20px;
+}
+
+
+/* === ÜGYEK: egyszerű lista – stabil középre igazítás === */
+#page-ugyek .sidebar{ display:none; }
+#page-ugyek .main{ justify-content:center; }
+#page-ugyek .content{ max-width: 1000px; width:100%; margin:0 auto; }
+
+
+/* === NUCLEAR CLEANUP: teljes eltávolítás === */
+#page-ugyek .dossier-panel{ display:none !important; }
+#page-ugyek > .dossier-panel{ display:none !important; }
+#page-ugyek .main > .cases-table-wrap{ display:none !important; }
+
+
+/* === FINAL PURGE: minden maradék dosszié elem eltüntetve === */
+#page-ugyek .panel-sub,
+#page-ugyek .dossier-mini,
+#page-ugyek .dossier-body{
+  display:none !important;
+}
+
+
+/* === ÜGYEK: lenyíló részletek (accordion) === */
+#page-ugyek tr.case-row{ cursor:pointer; }
+#page-ugyek tr.case-row.is-active{ background: rgba(0,94,162,0.06); }
+
+#page-ugyek tr.case-detail-row td{
+  padding: 0;
+  background: rgba(16,42,67,.02);
+  border-bottom: 1px solid var(--doj-border);
+}
+
+#page-ugyek .case-detail-wrap{
+  padding: 12px 14px 16px;
+}
+
+#page-ugyek .case-detail-card{
+  border:1px solid rgba(0,0,0,.10);
+  border-radius:14px;
+  background:#ffffff;
+  box-shadow: 0 10px 24px rgba(0,0,0,.08);
+  overflow:hidden;
+}
+
+#page-ugyek .case-detail-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:12px;
+  padding: 14px 14px;
+  background: rgba(16,42,67,.04);
+  border-bottom:1px solid rgba(0,0,0,.08);
+}
+
+#page-ugyek .case-detail-title{
+  font-family: Arial, sans-serif;
+  font-weight: 900;
+  color:#102a43;
+}
+
+#page-ugyek .case-detail-meta{
+  margin-top: 6px;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  color: rgba(0,0,0,.70);
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+#page-ugyek .case-detail-badges{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+
+#page-ugyek .case-detail-body{
+  padding: 14px;
+  font-family: Arial, sans-serif;
+}
+
+
+/* === KIVONAT MODAL (Public Summary) === */
+.summary-modal{ position: fixed; inset: 0; display:none; z-index: 9999; }
+.summary-modal.is-open{ display:block; }
+.summary-modal__backdrop{ position:absolute; inset:0; background: rgba(0,0,0,.45); }
+.summary-modal__dialog{
+  position: relative;
+  width: min(720px, calc(100% - 28px));
+  margin: 72px auto;
+  background:#fff;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.25);
+  overflow:hidden;
+  font-family: Arial, sans-serif;
+}
+.summary-modal__head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:12px;
+  padding: 14px 16px;
+  background: rgba(16,42,67,.04);
+  border-bottom: 1px solid rgba(0,0,0,.10);
+}
+.summary-modal__title{ font-weight: 900; color:#102a43; font-size: 18px; }
+.summary-modal__meta{ margin-top: 4px; font-size: 12px; color: rgba(0,0,0,.70); }
+.summary-modal__close{
+  border: 1px solid rgba(0,0,0,.18);
+  background:#fff;
+  border-radius: 10px;
+  width: 38px;
+  height: 38px;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+.summary-modal__body{ padding: 16px; }
+.summary-modal__section{ border:1px solid rgba(0,0,0,.10); border-radius: 14px; padding: 14px; background:#fff; }
+.summary-modal__label{ font-size: 11px; letter-spacing:.08em; text-transform: uppercase; color: rgba(0,0,0,.55); font-weight: 900; margin-bottom: 10px; }
+.summary-modal__text{ font-size: 14px; line-height: 1.55; color: rgba(0,0,0,.88); white-space: pre-wrap; }
+.summary-modal__note{ margin-top: 12px; font-size: 12px; color: rgba(0,0,0,.60); }
+@media (max-width: 600px){
+  .summary-modal__dialog{ margin: 18px auto; }
+}
+
+/* Kivonat pill gomb (button reset) */
+#page-ugyek .pill-btn{
+  border: 1px solid rgba(0,0,0,.12);
+  background: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+#page-ugyek .pill-btn:hover{ filter: brightness(0.98); }
+
+
+/* === HOME / ISMERTETŐ UPGRADE (vizuális, de hivatalos) === */
+.hero-card{
+  border:1px solid rgba(0,0,0,.10);
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(0,94,162,.08), rgba(255,255,255,1) 45%);
+  box-shadow: 0 10px 28px rgba(0,0,0,.06);
+  overflow:hidden;
+  position: relative;
+}
+.hero-card::before{
+  content:"";
+  position:absolute;
+  left:0; top:0; bottom:0;
+  width: 6px;
+  background: var(--doj-accent);
+}
+.hero-card-inner{
+  padding: 22px 22px 18px 28px;
+}
+.hero-kicker{
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,.55);
+  font-weight: 900;
+}
+.hero-title{
+  margin: 6px 0 6px 0;
+  font-size: 54px;
+  line-height: 1.05;
+}
+.hero-sub{
+  margin: 0;
+  font-size: 16px;
+  color: rgba(0,0,0,.72);
+  max-width: 72ch;
+}
+.hero-row{
+  display:flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+.pill{
+  display:inline-flex;
+  align-items:center;
+  gap: 8px;
+  border: 1px solid rgba(0,0,0,.10);
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-family: Arial, sans-serif;
+  font-weight: 800;
+  font-size: 12px;
+  background: rgba(255,255,255,.75);
+}
+.pill .dot{
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--doj-accent);
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,.85);
+}
+.stats-grid{
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 18px;
+}
+.stat-card{
+  border:1px solid rgba(0,0,0,.10);
+  border-radius: 14px;
+  padding: 14px 14px 12px 14px;
+  background: rgba(255,255,255,.85);
+}
+.stat-num{
+  font-family: Arial, sans-serif;
+  font-weight: 900;
+  font-size: 26px;
+  color: var(--doj-dark);
+  line-height: 1.1;
+}
+.stat-lab{
+  margin-top: 6px;
+  font-family: Arial, sans-serif;
+  font-weight: 900;
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,.58);
+}
+.section-cards{
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+.section-card{
+  border:1px solid rgba(0,0,0,.10);
+  border-radius: 14px;
+  padding: 14px;
+  background:#fff;
+}
+.section-card h4{
+  margin: 0 0 6px 0;
+  font-family: Arial, sans-serif;
+  font-weight: 900;
+  font-size: 13px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--doj-dark);
+}
+.section-card p{
+  margin: 0;
+  font-size: 14px;
+  color: rgba(0,0,0,.72);
+}
+/* Ismertető: alcímek „kártyás” jelölése */
+#page-ismerteto .content h2{
+  margin-top: 34px;
+  padding: 10px 12px;
+  border-left: 5px solid var(--doj-accent);
+  background: rgba(0,94,162,.06);
+  border-radius: 10px;
+}
+/* Vizsgálati folyamat timeline */
+.proc-timeline{
+  margin: 14px 0 6px 0;
+  border: 1px solid rgba(0,0,0,.10);
+  border-radius: 14px;
+  padding: 14px;
+  background: #fff;
+}
+.proc-step{
+  display:flex;
+  gap: 12px;
+  padding: 10px 6px;
+}
+.proc-step:not(:last-child){
+  border-bottom: 1px dashed rgba(0,0,0,.12);
+}
+.proc-bullet{
+  width: 22px; height: 22px;
+  border-radius: 999px;
+  background: rgba(0,94,162,.12);
+  border: 2px solid rgba(0,94,162,.35);
+  flex: 0 0 22px;
+  margin-top: 2px;
+}
+.proc-text h5{
+  margin: 0;
+  font-family: Arial, sans-serif;
+  font-weight: 900;
+  font-size: 13px;
+  color: var(--doj-dark);
+}
+.proc-text p{
+  margin: 4px 0 0 0;
+  font-size: 14px;
+  color: rgba(0,0,0,.72);
+}
+/* Responsive */
+@media (max-width: 980px){
+  .hero-title{ font-size: 40px; }
+  .stats-grid, .section-cards{ grid-template-columns: 1fr; }
+}
+
+
+/* === SIMPLE HERO (Főoldal/Ismertető) === */
+.simple-hero{
+  margin-top: 8px;
+  margin-bottom: 18px;
+  padding: 18px 18px 14px 22px;
+  border: 1px solid rgba(0,0,0,.10);
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(0,94,162,.08), rgba(255,255,255,1) 55%);
+  box-shadow: 0 10px 28px rgba(0,0,0,.06);
+  position: relative;
+  overflow: hidden;
+}
+.simple-hero::before{
+  content:"";
+  position:absolute;
+  left:0; top:0; bottom:0;
+  width: 6px;
+  background: var(--doj-accent);
+}
+.simple-hero::after{
+  content:"";
+  position:absolute;
+  right:-120px; top:-120px;
+  width: 300px; height: 300px;
+  border-radius: 999px;
+  border: 2px dashed rgba(0,0,0,.08);
+}
+.simple-hero__kicker{
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,.55);
+  font-weight: 900;
+}
+.simple-hero__title{
+  margin-top: 6px;
+  font-size: 44px;
+  line-height: 1.05;
+}
+.simple-hero__line{
+  margin-top: 10px;
+  height: 2px;
+  width: 120px;
+  background: rgba(0,94,162,.55);
+  border-radius: 999px;
+}
+@media (max-width: 980px){
+  .simple-hero__title{ font-size: 34px; }
+}
+
 </style>
 </head>
 <body>
@@ -700,6 +1592,7 @@ mark.current{outline:2px solid var(--doj-accent);}
 <div class="topnav-inner">
 <button class="navbtn active" data-target="home" type="button">Főoldal</button>
 <button class="navbtn" data-target="ismerteto" type="button">Ismertető</button>
+<button class="navbtn" data-target="ugyek" type="button">Ügyek</button>
 <button class="navbtn" data-target="allomanytabla" type="button">Alosztály állománytábla</button>
 </div>
 </div>
@@ -720,13 +1613,14 @@ mark.current{outline:2px solid var(--doj-accent);}
 <span class="sep">|</span>
 <span>Last Updated: February 11, 2026</span>
 </div>
-<div class="home-hero">
-<div class="home-title">Internal Oversight Bureau</div>
-<img alt="IOB Logo" src="iob-logo.png"/>
+
+
+<div class="simple-hero" aria-label="Főoldal kiemelés">
+  <div class="simple-hero__kicker">INTERNAL OVERSIGHT BUREAU</div>
+  <div class="simple-hero__title">Főoldal</div>
+  <div class="simple-hero__line"></div>
 </div>
-<p class="notice">
-        Az Internal Oversight Bureau (IOB) a Los Santos Police Department független felügyeleti alosztálya, amelynek feladata a rendőrségen belüli jogszerű, etikus és professzionális működés biztosítása.
-      </p>
+
 <h2 id="info-miert">1. Mi az IOB?</h2>
 <p>
         Az IOB minden olyan esetben eljárhat, amikor egy szolgálatot teljesítő rendőr intézkedése, magatartása vagy döntéshozatala a vonatkozó törvények, belső szabályzatok vagy etikai normák megsértésének gyanúját veti fel.
@@ -786,10 +1680,40 @@ mark.current{outline:2px solid var(--doj-accent);}
 <span class="sep">|</span>
 <span>Last Updated: February 11, 2026</span>
 </div>
-<img alt="IOB Emblem" src="iob-logo.png"/>
-<p class="notice">
-        Az Internal Oversight Bureau (IOB) a Los Santos Police Department független felügyeleti alosztálya, amelynek feladata a rendőrségen belüli jogszerű, etikus és professzionális működés biztosítása.
-      </p>
+
+<div class="hero-card" aria-label="Ismertető összefoglaló">
+  <div class="hero-card-inner">
+    <div class="hero-kicker">INTERNAL OVERSIGHT BUREAU • GUIDELINES</div>
+    <div class="hero-title" style="font-size:46px;">Eljárási és működési rend</div>
+    <p class="hero-sub">
+      Ez az oldal az IOB hatáskörét, az eljárási lépéseket, az alapelveket és a nyilvánosságra vonatkozó kereteket foglalja össze. Kereséshez használd a bal oldali mezőt (Ctrl+F).
+    </p>
+
+    <div class="hero-row" aria-label="Kiemelt elvek">
+      <span class="pill"><span class="dot"></span>Jogkövetés</span>
+      <span class="pill"><span class="dot"></span>Tárgyilagosság</span>
+      <span class="pill"><span class="dot"></span>Arányosság</span>
+      <span class="pill"><span class="dot"></span>Titoktartás</span>
+      <span class="pill"><span class="dot"></span>Nyilvános kivonat</span>
+    </div>
+
+    <div class="section-cards" aria-label="Gyors áttekintés">
+      <div class="section-card">
+        <h4>Hatáskör</h4>
+        <p>Minden olyan ügy, ahol jogsértés, etikai vétség vagy belső szabályzatsértés gyanúja merül fel.</p>
+      </div>
+      <div class="section-card">
+        <h4>Folyamat</h4>
+        <p>Ügyindítás → előzetes értékelés → vizsgálat → zárás → (kivonat közzététele, ha kiadható).</p>
+      </div>
+      <div class="section-card">
+        <h4>Jogok</h4>
+        <p>Az érintettek tájékoztatása, meghallgatása, és a döntések felülvizsgálatának (fellebbezés) rendje.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
 <h2 id="hatoskor">I. Hatáskör és illetékesség</h2>
 <p>Az IOB hatáskörébe tartozik minden olyan ügy kivizsgálása, amely az alábbiakat érintheti:</p>
 <ul>
@@ -1043,6 +1967,127 @@ mark.current{outline:2px solid var(--doj-accent);}
 </div>
 </div>
 </section>
+<section aria-label="Ügyek" class="page" id="page-ugyek">
+  <div class="main">
+    <div class="sidebar">
+      <h3>Keresés</h3>
+
+      <div class="searchbox">
+        <input id="caseSearch" placeholder="Keresés (ügyszám / cím / kulcsszó)..." type="search"/>
+        <div class="helptext">Tipp: pl. „jog”, „IOB-2025-097”, „bizonyíték”.</div>
+      </div>
+
+      <h3>Rendezés</h3>
+      <select id="caseSort">
+        <option value="closed_desc">Lezárás dátuma (↓)</option>
+        <option value="closed_asc">Lezárás dátuma (↑)</option>
+        <option value="id_asc">Ügyszám (A→Z)</option>
+        <option value="title_asc">Cím (A→Z)</option>
+      </select>
+
+      <div class="side-sep"></div>
+
+      <div class="helptext">
+        Itt kizárólag <strong>lezárt</strong> ügyek kivonatai jelennek meg (summary / anonimizált tartalom).
+      </div>
+</div>
+
+    <div class="content">
+      <h1>Ügyek</h1>
+      <div aria-label="Oldal információ" class="meta">
+        <span><a href="#" onclick="return false;">Internal Oversight Bureau</a> <span class="sep">›</span> <span>Ügyek</span></span>
+        <span class="sep">|</span>
+        <span>Last Updated: February 25, 2026</span>
+      </div>
+
+      <div class="cases-hero">
+        <div>
+          <div class="cases-hero-title">Case Dashboard / Ügykezelő</div>
+          <div class="cases-hero-sub">
+            Ügyek nyomon követése státusz, prioritás, felelős és aktivitás alapján. Kattints egy ügyre a részletes dossziéhoz.
+          </div>
+        </div>
+        <div class="cases-hero-badges">
+          </div>
+      </div>
+
+      
+      
+
+      <div class="cases-toolbar" aria-label="Keresés és rendezés">
+  <div class="toolbar-left">
+    <label class="toolbar-label" for="caseSearchTop">Keresés</label>
+    <input id="caseSearchTop" type="search" placeholder="Keresés (ügyszám / cím / kulcsszó)..." />
+  </div>
+  <div class="toolbar-right">
+    <label class="toolbar-label" for="caseSortTop">Rendezés</label>
+    <select id="caseSortTop">
+      <option value="closed_desc">Lezárás dátuma (↓)</option>
+      <option value="closed_asc">Lezárás dátuma (↑)</option>
+      <option value="id_asc">Ügyszám (A→Z)</option>
+      <option value="title_asc">Cím (A→Z)</option>
+    </select>
+  </div>
+</div>
+
+<div class="cases-panel" aria-label="Lezárt ügyek">
+  <div class="panel-head">
+    <div>
+      <div class="panel-title">Lezárt ügyek</div>
+      <div class="panel-sub" id="caseCount">—</div>
+    </div>
+    <div class="cases-mini">
+      <span class="pill status-closed"><span class="dot"></span>Csak lezárt</span>
+    </div>
+  </div>
+
+  <div class="cases-table-wrap">
+    <table class="cases-table" aria-label="Lezárt ügyek táblázat">
+      <thead>
+        <tr>
+          <th>Ügyszám</th>
+          <th>Cím</th>
+          <th>Lezárás</th>
+          <th>Megállapítás</th>
+          <th>Kivonat</th>
+        </tr>
+      </thead>
+      <tbody id="caseTableBody"></tbody>
+    </table>
+  </div>
+</div>
+            <div class="panel-sub" id="caseCount">—</div>
+          </div>
+
+          <div class="cases-table-wrap">
+            <table class="cases-table" aria-label="Ügylista táblázat">
+              <thead>
+                <tr>
+                  <th>Ügyszám</th>
+                  <th>Cím</th>
+                  <th>Lezárás</th>
+                  <th>Megállapítás</th>
+                  <th>Kivonat</th>
+</tr>
+              </thead>
+              <tbody id="caseTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        
+            </div>
+            
+          </div>
+
+          
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
 <section aria-label="Alosztály állománytábla" class="page" id="page-allomanytabla">
 <div class="main">
 <div class="content">
@@ -1064,7 +2109,7 @@ mark.current{outline:2px solid var(--doj-accent);}
 <table aria-label="Állománytábla" class="roster-table">
 <thead>
 <tr>
-<th style="width:72px;">Kép</th>
+<th>Kép</th>
 <th>Név</th>
 <th>Beosztás</th>
 <th>Osztály</th>
@@ -1148,6 +2193,7 @@ mark.current{outline:2px solid var(--doj-accent);}
   const pages = {
     home: document.getElementById("page-home"),
     ismerteto: document.getElementById("page-ismerteto"),
+    ugyek: document.getElementById("page-ugyek"),
     allomanytabla: document.getElementById("page-allomanytabla"),
   };
 
@@ -1168,7 +2214,11 @@ mark.current{outline:2px solid var(--doj-accent);}
       bindHomeAnchors();
       initScrollAnimFor(document.querySelector("#page-home .content"));
     }
-  }
+  
+    if(target === "ugyek"){
+      initScrollAnimFor(document.querySelector("#page-ugyek .content"));
+    }
+}
 
   buttons.forEach(btn => {
     btn.addEventListener("click", () => setActive(btn.dataset.target));
@@ -1409,6 +2459,379 @@ mark.current{outline:2px solid var(--doj-accent);}
 
 })();
 
+
+// --- ÜGYEK: Lezárt ügyek (lenyíló részletek) ---
+(function(){
+  const page = document.getElementById("page-ugyek");
+  if(!page) return;
+
+  const qEl = document.getElementById("caseSearchTop");
+  const soEl = document.getElementById("caseSortTop");
+  const bodyEl = document.getElementById("caseTableBody");
+  const countEl = document.getElementById("caseCount");
+
+  // Lezárt ügyek – példa adatok + részletek
+  const cases = [
+    {
+      id: "IOB-2026-009",
+      title: "Kommunikációs panasz – lezárt",
+      closedAt: "2026-02-22",
+      finding: "Részben megalapozott",
+      publicSummary: true,
+      assigned: "Jacob D. Scully",
+      summary: "A kommunikációs panasz egy része megalapozott. Figyelmeztetés és coaching javasolt.",
+      subjects: ["Bejelentő (anonim)", "Érintett állomány"],
+      timeline: [
+        { date:"2026-02-14 20:40", title:"Ügyindítás", note:"Panasz rögzítve." },
+        { date:"2026-02-17 11:05", title:"Meghallgatás", note:"Kivonatolt meghallgatás lebonyolítva." },
+        { date:"2026-02-22 16:18", title:"Zárás", note:"Megállapítás: részben megalapozott." }
+      ],
+      evidence: [
+        { type:"Summary", ref:"COMM-SUM-02", desc:"Anonimizált összefoglaló." }
+      ],
+      actions: [
+        { title:"Figyelmeztetés", desc:"Parancsnoki jelzés: coaching / kommunikációs tréning." }
+      ]
+    },
+    {
+      id: "IOB-2026-006",
+      title: "Bizonyítékkezelés – adminisztratív eltérés",
+      closedAt: "2026-02-18",
+      finding: "Nem megalapozott",
+      publicSummary: true,
+      assigned: "Bailey Rae Brady",
+      summary: "Az eltérés adminisztratív jellegű volt, nem érintette a bizonyíték integritását. Intézkedés nem szükséges.",
+      subjects: ["Evidence Locker", "Ügyeletes állomány"],
+      timeline: [
+        { date:"2026-02-06 08:12", title:"Ügyindítás", note:"Rendszeres audit eltérést jelzett." },
+        { date:"2026-02-10 14:55", title:"Ellenőrzés", note:"Chain-of-custody formok összevetése." },
+        { date:"2026-02-18 09:10", title:"Zárás", note:"Megállapítás: nem megalapozott." }
+      ],
+      evidence: [
+        { type:"Audit Log", ref:"AUD-02/2026", desc:"Ellenőrzési kivonat, anonimizálva." }
+      ],
+      actions: [
+        { title:"Admin javítás", desc:"Űrlapkitöltési iránymutatás pontosítva." }
+      ]
+    },
+    {
+      id: "IOB-2026-002",
+      title: "Szolgálati szabályzat – eljárási hiba",
+      closedAt: "2026-02-03",
+      finding: "Megalapozott",
+      publicSummary: false,
+      assigned: "Justin D. Scully",
+      summary: "Eljárási hiba megállapítva. A részletes anyag belső (confidential), nyilvános kivonat nem kiadható.",
+      subjects: ["Érintett állomány (belső)"],
+      timeline: [
+        { date:"2026-01-20 08:55", title:"Ügyindítás", note:"Parancsnoki jelzés alapján." },
+        { date:"2026-01-25 12:10", title:"Dokumentumellenőrzés", note:"Szolgálati iratok összevetése." },
+        { date:"2026-02-03 18:05", title:"Zárás", note:"Megállapítás: megalapozott." }
+      ],
+      evidence: [
+        { type:"Internal Memo", ref:"INT-MEMO-2026/02", desc:"Belső értékelés (nem publikus)." }
+      ],
+      actions: [
+        { title:"Kötelező továbbképzés", desc:"Eljárásrend frissítő képzés kijelölt állománynak." }
+      ]
+    },
+    {
+      id: "IOB-2025-118",
+      title: "Panaszkezelés – lezárt",
+      closedAt: "2026-01-09",
+      finding: "Részben megalapozott",
+      publicSummary: true,
+      assigned: "Jacob D. Scully",
+      summary: "A panasz egyes elemei alátámasztást nyertek. Intézkedési javaslat rögzítve parancsnoki továbbításra.",
+      subjects: ["Érintett állomány", "Parancsnoki szint"],
+      timeline: [
+        { date:"2025-12-18 11:03", title:"Ügyindítás", note:"Panasz rögzítve." },
+        { date:"2026-01-04 09:40", title:"Meghallgatások", note:"Érintettek és tanúk kivonatolt meghallgatása." },
+        { date:"2026-01-09 17:20", title:"Zárás", note:"Megállapítás: részben megalapozott." }
+      ],
+      evidence: [
+        { type:"Public Summary", ref:"PUBLIC-SUMMARY", desc:"Anonimizált kivonat kiadható." },
+        { type:"CAD Extract", ref:"CAD-EX-1218", desc:"Dispatch események összefoglalója." }
+      ],
+      actions: [
+        { title:"Fegyelmi javaslat", desc:"Javasolt intézkedés rögzítve, parancsnoki döntés szükséges." }
+      ]
+    },
+    {
+      id: "IOB-2025-097",
+      title: "Etikai bejelentés – lezárt",
+      closedAt: "2025-11-02",
+      finding: "Nem megalapozott",
+      publicSummary: true,
+      assigned: "Bailey Rae Brady",
+      summary: "Vizsgálat lezárva: a bejelentésben foglaltak nem nyertek alátámasztást. Intézkedés nem szükséges.",
+      subjects: ["Bejelentő (anonim)"],
+      timeline: [
+        { date:"2025-10-03 09:00", title:"Ügyindítás", note:"Etikai bejelentés rögzítve." },
+        { date:"2025-10-11 13:20", title:"Előzetes értékelés", note:"Hatáskör és érintettség ellenőrizve." },
+        { date:"2025-11-02 15:30", title:"Zárás", note:"Megállapítás: nem megalapozott." }
+      ],
+      evidence: [
+        { type:"Interview Summary", ref:"INT-SUM-03", desc:"Meghallgatási kivonat (belső)." },
+        { type:"Report Extract", ref:"IR-EX-091", desc:"Szolgálati jelentés kivonat, anonimizálva." }
+      ],
+      actions: [
+        { title:"Archiválás", desc:"Ügy nyilvántartásban lezárt státusz rögzítve." }
+      ]
+    }
+  ];
+  window.__IOB_CASES = cases;
+
+
+  // --- Kivonat (Public Summary) modal ---
+  const summaryModal = document.getElementById("summaryModal");
+  const summaryTitle = document.getElementById("summaryTitle");
+  const summaryMeta = document.getElementById("summaryMeta");
+  const summaryText = document.getElementById("summaryText");
+
+  function openSummary(caseId){
+    const c = cases.find(x => x.id === caseId);
+    if(!c || !c.publicSummary) return;
+
+    summaryTitle.textContent = `Kivonat — ${c.id}`;
+    summaryMeta.textContent = `Lezárás: ${c.closedAt} | Megállapítás: ${c.finding} | Felelős: ${c.assigned}`;
+    summaryText.textContent = (c.publicSummaryText || c.summary || "—");
+
+    summaryModal.classList.add("is-open");
+    summaryModal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+
+    const closeBtn = summaryModal.querySelector("[data-summary-close]");
+    if(closeBtn) closeBtn.focus();
+  }
+
+  function closeSummary(){
+    if(!summaryModal) return;
+    summaryModal.classList.remove("is-open");
+    summaryModal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  }
+
+  if(summaryModal){
+    summaryModal.addEventListener("click", (e) => {
+      const t = e.target;
+      if(t && t.getAttribute && t.getAttribute("data-summary-close") === "1"){
+        closeSummary();
+      }
+    });
+  }
+
+  document.addEventListener("keydown", (e) => {
+    if(e.key === "Escape" && summaryModal && summaryModal.classList.contains("is-open")){
+      e.preventDefault();
+      closeSummary();
+    }
+  });
+
+
+
+  function matches(c, q){
+    if(!q) return true;
+    const hay = [
+      c.id, c.title, c.finding, c.assigned, c.closedAt,
+      (c.summary || ""),
+      (c.subjects || []).join(" "),
+      (c.evidence || []).map(e => (e.type+" "+e.ref+" "+e.desc)).join(" ")
+    ].join(" ").toLowerCase();
+    return hay.includes(q);
+  }
+
+  function apply(){
+    const q = (qEl.value || "").trim().toLowerCase();
+
+    // Only show cases where public summary is available
+    let list = cases
+      .filter(c => c.publicSummary === true)
+      .filter(c => matches(c, q));
+
+    const mode = soEl.value || "closed_desc";
+    const dateVal = (s) => { try { return new Date(s).getTime(); } catch(e){ return 0; } };
+
+    if(mode === "closed_asc") list.sort((a,b) => dateVal(a.closedAt) - dateVal(b.closedAt));
+    else if(mode === "id_asc") list.sort((a,b) => (a.id||"").localeCompare(b.id||""));
+    else if(mode === "title_asc") list.sort((a,b) => (a.title||"").localeCompare(b.title||"", "hu"));
+    else list.sort((a,b) => dateVal(b.closedAt) - dateVal(a.closedAt));
+
+    return list;
+  }
+
+  function summaryPill(v, caseId){
+    if(v){
+      return `<button type="button" class="pill status-in_review pill-btn" data-action="open-summary" data-case-id="${caseId}"><span class="dot"></span>Elérhető</button>`;
+    }
+    return `<span class="pill status-closed"><span class="dot"></span>Nincs</span>`;
+  }
+
+function detailHTML(c){
+    const subjects = (c.subjects || []).map(s => `<span class="tag">${s}</span>`).join("");
+    const timeline = (c.timeline || []).map(t => `
+      <div class="tl-item">
+        <div class="tl-top"><span>${t.date}</span><span>${c.id}</span></div>
+        <div class="tl-title">${t.title}</div>
+        <div class="tl-note">${t.note || ""}</div>
+      </div>
+    `).join("");
+    const evidence = (c.evidence || []).map(e => `
+      <div class="ev-item">
+        <div class="ev-head"><span>${e.type}</span><span>${e.ref}</span></div>
+        <div class="ev-title">${e.ref}</div>
+        <div class="ev-desc">${e.desc || ""}</div>
+      </div>
+    `).join("");
+    const actions = (c.actions || []).map(a => `
+      <div class="ac-item">
+        <div class="ac-title">${a.title}</div>
+        <div class="ac-desc">${a.desc || ""}</div>
+      </div>
+    `).join("");
+
+    return `
+      <div class="case-detail-wrap">
+        <div class="case-detail-card">
+          <div class="case-detail-head">
+            <div>
+              <div class="case-detail-title">${c.id} — ${c.title}</div>
+              <div class="case-detail-meta">
+                <span>Lezárás: <strong>${c.closedAt}</strong></span>
+                <span class="sep">|</span>
+                <span>Megállapítás: <strong>${c.finding}</strong></span>
+                <span class="sep">|</span>
+                <span>Felelős: <strong>${c.assigned}</strong></span>
+                <span class="sep">|</span>
+                <span>Kivonat: <strong>${c.publicSummary ? "elérhető" : "nem elérhető"}</strong></span>
+              </div>
+            </div>
+            <div class="case-detail-badges">
+              <span class="pill status-closed"><span class="dot"></span>LEZÁRT</span>
+              ${c.publicSummary ? '<span class="pill status-in_review"><span class="dot"></span>KIVONAT</span>' : '<span class="pill status-closed"><span class="dot"></span>BELSŐ</span>'}
+            </div>
+          </div>
+
+          <div class="case-detail-body">
+            <div class="dossier-grid">
+              <div class="dossier-box">
+                <h4>Összefoglaló</h4>
+                <p>${c.summary || "—"}</p>
+              </div>
+              <div class="dossier-box">
+                <h4>Érintettek</h4>
+                <div class="case-tags" style="margin-top:8px;">${subjects || "<span class='helptext'>—</span>"}</div>
+              </div>
+            </div>
+
+            <div class="dossier-section">
+              <h3>Timeline / Eseménynapló</h3>
+              <div class="timeline">${timeline || "<div class='helptext'>Nincs esemény.</div>"}</div>
+            </div>
+
+            <div class="dossier-section">
+              <h3>Evidence / Hivatkozások</h3>
+              <div class="evidence-list">${evidence || "<div class='helptext'>Nincs evidence.</div>"}</div>
+            </div>
+
+            <div class="dossier-section">
+              <h3>Intézkedések / Ajánlások</h3>
+              <div class="actions-list">${actions || "<div class='helptext'>Nincs javaslat.</div>"}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function closeAll(){
+    document.querySelectorAll("#caseTableBody tr.case-detail-row").forEach(r => r.hidden = true);
+    document.querySelectorAll("#caseTableBody tr.case-row").forEach(r => r.classList.remove("is-active"));
+  }
+
+  function toggle(id){
+    const row = document.querySelector(`#caseTableBody tr.case-row[data-case-id="${id}"]`);
+    const detail = document.querySelector(`#caseTableBody tr.case-detail-row[data-case-detail="${id}"]`);
+    if(!row || !detail) return;
+
+    const open = !detail.hidden;
+    closeAll();
+    if(!open){
+      row.classList.add("is-active");
+      detail.hidden = false;
+      const y = row.getBoundingClientRect().top + window.scrollY - (window.__stickyHeaderHeight || 0) - 12;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  }
+
+  function renderTable(list){
+    bodyEl.innerHTML = "";
+    countEl.textContent = `${list.length} ügy`;
+
+    if(!list.length){
+      const tr = document.createElement("tr");
+      tr.innerHTML = `<td colspan="5"><div class="notice" style="margin:10px 0;">Nincs találat a keresésre.</div></td>`;
+      bodyEl.appendChild(tr);
+      return;
+    }
+
+    list.forEach(c => {
+      const tr = document.createElement("tr");
+      tr.className = "case-row";
+      tr.setAttribute("data-case-id", c.id);
+      tr.tabIndex = 0;
+      tr.innerHTML = `
+        <td data-label="Ügyszám"><strong>${c.id}</strong></td>
+        <td data-label="Cím">
+          <div class="case-title-cell">${c.title}</div>
+          <div class="case-sub-cell">Felelős: ${c.assigned}</div>
+        </td>
+        <td data-label="Lezárás">${c.closedAt}</td>
+        <td data-label="Megállapítás"><span class="pill status-closed"><span class="dot"></span>${c.finding}</span></td>
+        <td data-label="Kivonat">${summaryPill(c.publicSummary, c.id)}</td>
+      `;
+      tr.addEventListener("click", () => toggle(c.id));
+      tr.addEventListener("keydown", (e) => {
+        if(e.key === "Enter"){ e.preventDefault(); toggle(c.id); }
+        if(e.key === "Escape"){ e.preventDefault(); closeAll(); }
+      });
+
+      const dtr = document.createElement("tr");
+      dtr.className = "case-detail-row";
+      dtr.setAttribute("data-case-detail", c.id);
+      dtr.hidden = true;
+      const td = document.createElement("td");
+      td.colSpan = 5;
+      td.innerHTML = detailHTML(c);
+      dtr.appendChild(td);
+
+      bodyEl.appendChild(tr);
+      bodyEl.appendChild(dtr);
+    });
+  }
+
+
+
+  // Kivonat gomb kezelése (delegálás) – ne nyissa/csukja az accordiont
+  if(bodyEl){
+    bodyEl.addEventListener("click", (e) => {
+      const btn = e.target && e.target.closest ? e.target.closest('[data-action="open-summary"]') : null;
+      if(btn){
+        e.stopPropagation();
+        const cid = btn.getAttribute("data-case-id");
+        if(cid) openSummary(cid);
+      }
+    });
+  }
+  function render(){
+    closeAll();
+    renderTable(apply());
+  }
+
+  if(qEl) qEl.addEventListener("input", render);
+  if(soEl) soEl.addEventListener("change", render);
+  render();
+})();
 // ===== Roster expandable profiles (accordion) =====
 (function(){
   const tbody = document.querySelector('.roster-table tbody');
@@ -1446,6 +2869,54 @@ mark.current{outline:2px solid var(--doj-accent);}
     if(!withinRoster) closeAll();
   });
 })();
+
+  // Home stats (publikus lezárt ügyek)
+  function updateHomeStats(){
+    try{
+      const cases = (window.__IOB_CASES || []).filter(c => c && c.publicSummary === true);
+      const elCount = document.getElementById("statPublicCases");
+      const elLatest = document.getElementById("statLatestClosed");
+      if(elCount) elCount.textContent = String(cases.length || 0);
+
+      const dates = cases.map(c => ({id:c.id, t: Date.parse(c.closedAt)})).filter(x => !isNaN(x.t)).sort((a,b)=>b.t-a.t);
+      if(elLatest){
+        if(dates.length){
+          const d = new Date(dates[0].t);
+          const yyyy = d.getFullYear();
+          const mm = String(d.getMonth()+1).padStart(2,"0");
+          const dd = String(d.getDate()).padStart(2,"0");
+          elLatest.textContent = `${yyyy}-${mm}-${dd}`;
+        } else {
+          elLatest.textContent = "—";
+        }
+      }
+    }catch(e){}
+  }
+  window.addEventListener("load", updateHomeStats);
 </script>
+
+  <!-- === KIVONAT MODAL (Public Summary) === -->
+  <div id="summaryModal" class="summary-modal" aria-hidden="true">
+    <div class="summary-modal__backdrop" data-summary-close="1"></div>
+    <div class="summary-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="summaryTitle">
+      <div class="summary-modal__head">
+        <div>
+          <div id="summaryTitle" class="summary-modal__title">Kivonat</div>
+          <div id="summaryMeta" class="summary-modal__meta">—</div>
+        </div>
+        <button class="summary-modal__close" type="button" aria-label="Bezárás" data-summary-close="1">×</button>
+      </div>
+      <div class="summary-modal__body">
+        <div class="summary-modal__section">
+          <div class="summary-modal__label">Nyilvános összefoglaló</div>
+          <div id="summaryText" class="summary-modal__text">—</div>
+        </div>
+        <div class="summary-modal__note">
+          A kivonat anonimizált, tájékoztató jellegű; a teljes dosszié belső nyilvántartás része.
+        </div>
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>
