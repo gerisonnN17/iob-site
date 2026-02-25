@@ -1959,6 +1959,225 @@ mark.current{outline:2px solid var(--doj-accent);}
   overflow: visible !important;
 }
 
+
+/* =============================== */
+/*   ÁLLOMÁNYTÁBLA – FINOMÍTÁS     */
+/*   (ne legyen "a semmiben")      */
+/* =============================== */
+
+.roster-table{
+  border-collapse: separate;
+  border-spacing: 0 14px; /* kártyás sorok közti tér */
+}
+
+.roster-table thead th{
+  background: #f6f8fb;
+  border-bottom: 1px solid rgba(0,0,0,.10);
+  padding: 14px 16px;
+}
+
+.roster-table tbody tr{
+  background: #ffffff;
+  box-shadow: 0 10px 24px rgba(16,42,67,.08);
+  outline: 1px solid rgba(0,0,0,.06);
+}
+
+.roster-table tbody tr:hover{
+  outline-color: rgba(0,94,162,.25);
+  box-shadow: 0 12px 28px rgba(0,94,162,.12);
+}
+
+.roster-table tbody td{
+  padding: 16px 16px;
+  vertical-align: middle;
+  border-bottom: none !important; /* a kártyás soroknál nem kell az alsó vonal */
+}
+
+.roster-table tbody td:first-child{
+  border-radius: 14px 0 0 14px;
+  position: relative;
+}
+
+.roster-table tbody td:last-child{
+  border-radius: 0 14px 14px 0;
+}
+
+/* Bal oldali nagyon finom akcent csík a soron */
+.roster-table tbody td:first-child::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:10px;
+  bottom:10px;
+  width:4px;
+  border-radius: 14px;
+  background: rgba(0,94,162,.18);
+}
+
+/* Név picit erősebb, hogy ne "lebegjen" */
+.roster-table td.roster-name{
+  font-weight: 900;
+}
+
+.roster-table td.roster-role{
+  color: rgba(16,42,67,.86);
+}
+
+/* Kis "meta" érzés a részleg + státusz oszlopoknak */
+.roster-table td.roster-dept,
+.roster-table td.roster-status{
+  font-family: Arial, sans-serif;
+  font-weight: 800;
+  letter-spacing: .02em;
+}
+
+
+/* =============================== */
+/*  ROSTER – CLEAN CELL CONTAINERS */
+/*  (nincs extra szöveg, nincs csúszás) */
+/* =============================== */
+
+/* keep card-row feel but structure content */
+.roster-table{
+  border-collapse: separate;
+  border-spacing: 0 14px;
+}
+
+/* neutral cell alignment */
+.roster-table tbody td{
+  padding: 16px 16px;
+  vertical-align: middle;
+}
+
+/* Name cell: subtle container */
+.roster-table td.roster-name{
+  font-weight: 900;
+}
+.roster-table td.roster-name > span,
+.roster-table td.roster-name > strong,
+.roster-table td.roster-name{
+  line-height: 1.25;
+}
+
+/* Role cell: compact pill group, wrap safely */
+.roster-table td.roster-role .rank-wrap{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 999px;
+  background: rgba(16,42,67,.035);
+  border: 1px solid rgba(16,42,67,.10);
+  max-width: 100%;
+  white-space: normal;
+}
+.roster-table td.roster-role .rank-wrap span:last-child{
+  color: rgba(16,42,67,.86);
+  font-size: 14px;
+}
+
+/* Department + Status as small centered chips, without changing table layout */
+.roster-table td.roster-dept .dept-chip,
+.roster-table td.roster-status .status-chip{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding: 7px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,.10);
+  background:#fff;
+  font-family: Arial, sans-serif;
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: .01em;
+}
+.roster-table td.roster-dept .dept-chip::before{
+  content:"";
+  width: 8px;
+  height: 8px;
+  border-radius: 99px;
+  background: rgba(0,94,162,.28);
+}
+.roster-table td.roster-status .status-chip::before{
+  content:"";
+  width: 8px;
+  height: 8px;
+  border-radius: 99px;
+  background: rgba(46,125,50,.40);
+}
+
+/* Ensure chips don't force cell shrink */
+.roster-table td.roster-dept,
+.roster-table td.roster-status{
+  white-space: nowrap;
+}
+
+/* Responsive: allow chips to wrap nicely */
+@media(max-width: 1000px){
+  .roster-table td.roster-dept,
+  .roster-table td.roster-status{
+    white-space: normal;
+  }
+}
+
+
+/* =============================== */
+/*     TOP NAV – BUTTON REDESIGN   */
+/*   (gomb marad, csak szebb)      */
+/* =============================== */
+
+.topnav{
+  background: #ffffff;
+  border-bottom: 1px solid rgba(0,0,0,.08);
+}
+
+.topnav-inner{
+  padding: 12px 20px;
+  gap: 10px;
+}
+
+.navbtn{
+  border: 1px solid rgba(16,42,67,.14) !important;
+  background: #ffffff !important;
+  color: rgba(16,42,67,.82) !important;
+  padding: 10px 14px !important;
+  border-radius: 999px !important;
+  font-size: 14px !important;
+  font-weight: 800 !important;
+  letter-spacing: .01em !important;
+  box-shadow: 0 1px 0 rgba(16,42,67,.06);
+  transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease, background .12s ease, color .12s ease;
+}
+
+.navbtn:hover{
+  border-color: rgba(0,94,162,.30) !important;
+  background: rgba(0,94,162,.05) !important;
+  color: #005ea2 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(0,0,0,.08);
+}
+
+.navbtn.active{
+  background: linear-gradient(180deg, #0b2e4f 0%, #0a2742 100%) !important;
+  border-color: rgba(11,46,79,.75) !important;
+  color: #ffffff !important;
+  box-shadow: 0 14px 28px rgba(11,46,79,.22);
+}
+
+.navbtn:focus{
+  outline: none;
+}
+
+.navbtn:focus-visible{
+  box-shadow: 0 0 0 4px rgba(0,94,162,.18), 0 14px 28px rgba(11,46,79,.18);
+}
+
+/* Mobile: make sure buttons wrap nicely */
+@media(max-width: 640px){
+  .topnav-inner{ gap: 8px; }
+  .navbtn{ padding: 9px 12px !important; font-size: 13px !important; }
+}
+
 </style>
 </head>
 <body>
@@ -1973,7 +2192,7 @@ mark.current{outline:2px solid var(--doj-accent);}
 <img alt="IOB Logo" src="iob-logo.png"/>
 <div class="header-text">
 <strong>Internal Oversight Bureau</strong>
-<span>Department of Justice Division</span>
+<span>Részleg of Justice Division</span>
 </div>
 </div>
 </div>
@@ -2137,7 +2356,7 @@ mark.current{outline:2px solid var(--doj-accent);}
 <li><strong>Szakmaiság</strong> – az eljárások dokumentált, ellenőrizhető módon zajlanak</li>
 </ul>
 <h2 id="szervezet">IV. Szervezeti felépítés és rangstruktúra</h2>
-<h3>1. Director of Internal Oversight</h3>
+<h3>1. Belső ellenőrzés igazgatója</h3>
 <p>Az Internal Oversight Bureau vezetője. Feladatköre:</p>
 <ul>
 <li>az IOB teljes működésének felügyelete</li>
@@ -2145,7 +2364,7 @@ mark.current{outline:2px solid var(--doj-accent);}
 <li>jelentések jóváhagyása és továbbítása a parancsnokság/vezetőség felé</li>
 <li>fegyelmi intézkedésekre vonatkozó javaslatok megtétele</li>
 </ul>
-<h3>2. Deputy Director</h3>
+<h3>2. Igazgatóhelyettes</h3>
 <p>A Director helyettese, operatív vezető. Feladatköre:</p>
 <ul>
 <li>aktív vizsgálatok koordinálása</li>
@@ -2288,7 +2507,7 @@ mark.current{outline:2px solid var(--doj-accent);}
 <li>Megállapítások:</li>
 <li>Értékelés:</li>
 <li>Ajánlott intézkedés:</li>
-<li>Jóváhagyta: Director / Deputy Director</li>
+<li>Jóváhagyta: Director / Igazgatóhelyettes</li>
 <li>Dátum:</li>
 </ul>
 <h2 id="titoktartas">IX. Titoktartási és magatartási szabályok</h2>
@@ -2430,7 +2649,7 @@ mark.current{outline:2px solid var(--doj-accent);}
 <div class="main">
 <div class="content">
 <div class="bureau-hero" aria-label="Alosztály állománytábla fejléc">
-  <div class="hero-kicker">Internal Oversight Bureau • Personnel Registry</div>
+  <div class="hero-kicker">Internal Oversight Bureau • Személyzeti nyilvántartás</div>
   <h1 class="hero-title">Alosztály állománytábla</h1>
   <p class="hero-sub">
     Operatív állomány és vezetői struktúra – kattints a névre a részletes profilkártyához.
@@ -2457,22 +2676,22 @@ mark.current{outline:2px solid var(--doj-accent);}
 <tbody><tr>
 <td><img alt="Justin D. Scully profilkép" class="roster-avatar" src="justin.png"/></td>
 <td class="roster-name"><button class="roster-name-btn" data-person="justin" type="button">Justin D. Scully</button></td>
-<td class="roster-role"><span class="rank-wrap"><span class="rank-badge rank-director">Director</span><span>Director of Internal Oversight</span></span></td>
+<td class="roster-role"><span class="rank-wrap"><span class="rank-badge rank-director">Igazgató</span></span></td>
 <td><span class="dept-iob">IOB</span></td>
-<td><span class="status-active">Active</span></td>
-</tr><tr class="roster-detail" data-person-detail="justin" hidden=""><td colspan="5"><div aria-label="Justin D. Scully profil" class="profile-card" role="region"><div class="profile-top"><img alt="Justin D. Scully portré" class="profile-avatar" src="justin.png"/><div class="profile-meta"><div class="profile-name">Justin D. Scully</div><div class="profile-role">Director of Internal Oversight</div><div class="profile-chips"><span class="chip chip-dept">IOB</span><span class="chip chip-status">Active</span></div></div></div><div class="profile-grid"><div class="profile-field"><div class="profile-label">Rank/Position</div><div class="profile-value">Director of Internal Oversight</div></div><div class="profile-field"><div class="profile-label">Department</div><div class="profile-value">IOB</div></div><div class="profile-field"><div class="profile-label">Clearance Level</div><div class="profile-value"><span class="clearance-badge">EXECUTIVE</span></div></div><div class="profile-field"><div class="profile-label">Status</div><div class="profile-value">Active</div></div><div class="profile-field"><div class="profile-label">Station</div><div class="profile-value">Vespucci Boulevard PD</div></div><div class="profile-field"><div class="profile-label">Phone Number</div><div class="profile-value">—</div></div><div class="profile-field"><div class="profile-label">Date of Birth</div><div class="profile-value">2000-12-29</div></div><div class="profile-field"><div class="profile-label">Nationality</div><div class="profile-value">American</div></div><div class="profile-field"><div class="profile-label">Gender</div><div class="profile-value">Male</div></div><div class="profile-field"><div class="profile-label">Hobby</div><div class="profile-value">Fishing, Soccer, Basketball</div></div></div><div class="profile-bio">A Bureau működésének stratégiai irányítása, vizsgálatok engedélyezése és lezárása, jelentések jóváhagyása.</div></div></td></tr><tr>
+<td><span class="status-active">Aktív</span></td>
+</tr><tr class="roster-detail" data-person-detail="justin" hidden=""><td colspan="5"><div aria-label="Justin D. Scully profil" class="profile-card" role="region"><div class="profile-top"><img alt="Justin D. Scully portré" class="profile-avatar" src="justin.png"/><div class="profile-meta"><div class="profile-name">Justin D. Scully</div><div class="profile-role">Belső ellenőrzés igazgatója</div><div class="profile-chips"><span class="chip chip-dept">IOB</span><span class="chip chip-status">Aktív</span></div></div></div><div class="profile-grid"><div class="profile-field"><div class="profile-label">Beosztás</div><div class="profile-value">Belső ellenőrzés igazgatója</div></div><div class="profile-field"><div class="profile-label">Részleg</div><div class="profile-value">IOB</div></div><div class="profile-field"><div class="profile-label">Hozzáférési szint</div><div class="profile-value"><span class="clearance-badge">VEZETŐI</span></div></div><div class="profile-field"><div class="profile-label">Status</div><div class="profile-value">Aktív</div></div><div class="profile-field"><div class="profile-label">Station</div><div class="profile-value">Vespucci Boulevard PD</div></div><div class="profile-field"><div class="profile-label">Telefonszám</div><div class="profile-value">—</div></div><div class="profile-field"><div class="profile-label">Születési dátum</div><div class="profile-value">2000-12-29</div></div><div class="profile-field"><div class="profile-label">Állampolgárság</div><div class="profile-value">Amerikai</div></div><div class="profile-field"><div class="profile-label">Nem</div><div class="profile-value">Férfi</div></div><div class="profile-field"><div class="profile-label">Hobbi</div><div class="profile-value">Horgászat, Foci, Kosárlabda</div></div></div><div class="profile-bio">A Bureau működésének stratégiai irányítása, vizsgálatok engedélyezése és lezárása, jelentések jóváhagyása.</div></div></td></tr><tr>
 <td><img alt="Jacob D. Scully profilkép" class="roster-avatar" src="jacob.png"/></td>
 <td class="roster-name"><button class="roster-name-btn" data-person="jacob" type="button">Jacob D. Scully</button></td>
-<td class="roster-role"><span class="rank-wrap"><span class="rank-badge rank-director">Director</span><span>Director of Internal Oversight</span></span></td>
+<td class="roster-role"><span class="rank-wrap"><span class="rank-badge rank-director">Igazgató</span></span></td>
 <td><span class="dept-iob">IOB</span></td>
-<td><span class="status-active">Active</span></td>
-</tr><tr class="roster-detail" data-person-detail="jacob" hidden=""><td colspan="5"><div aria-label="Jacob D. Scully profil" class="profile-card" role="region"><div class="profile-top"><img alt="Jacob D. Scully portré" class="profile-avatar" src="jacob.png"/><div class="profile-meta"><div class="profile-name">Jacob D. Scully</div><div class="profile-role">Director of Internal Oversight</div><div class="profile-chips"><span class="chip chip-dept">IOB</span><span class="chip chip-status">Active</span></div></div></div><div class="profile-grid"><div class="profile-field"><div class="profile-label">Rank/Position</div><div class="profile-value">Director of Internal Oversight</div></div><div class="profile-field"><div class="profile-label">Department</div><div class="profile-value">IOB</div></div><div class="profile-field"><div class="profile-label">Clearance Level</div><div class="profile-value"><span class="clearance-badge">EXECUTIVE</span></div></div><div class="profile-field"><div class="profile-label">Status</div><div class="profile-value">Active</div></div><div class="profile-field"><div class="profile-label">Station</div><div class="profile-value">Vespucci Boulevard PD</div></div><div class="profile-field"><div class="profile-label">Phone Number</div><div class="profile-value">—</div></div><div class="profile-field"><div class="profile-label">Date of Birth</div><div class="profile-value">2000-12-29</div></div><div class="profile-field"><div class="profile-label">Nationality</div><div class="profile-value">American</div></div><div class="profile-field"><div class="profile-label">Gender</div><div class="profile-value">Male</div></div><div class="profile-field"><div class="profile-label">Hobby</div><div class="profile-value">Weightlifting, Cooking, Philosophy</div></div></div><div class="profile-bio"><div class="profile-motto">„Az éj sötétje nem rejti el a bűnt, csak mélyíti.”</div></div></div></td></tr><tr>
+<td><span class="status-active">Aktív</span></td>
+</tr><tr class="roster-detail" data-person-detail="jacob" hidden=""><td colspan="5"><div aria-label="Jacob D. Scully profil" class="profile-card" role="region"><div class="profile-top"><img alt="Jacob D. Scully portré" class="profile-avatar" src="jacob.png"/><div class="profile-meta"><div class="profile-name">Jacob D. Scully</div><div class="profile-role">Belső ellenőrzés igazgatója</div><div class="profile-chips"><span class="chip chip-dept">IOB</span><span class="chip chip-status">Aktív</span></div></div></div><div class="profile-grid"><div class="profile-field"><div class="profile-label">Beosztás</div><div class="profile-value">Belső ellenőrzés igazgatója</div></div><div class="profile-field"><div class="profile-label">Részleg</div><div class="profile-value">IOB</div></div><div class="profile-field"><div class="profile-label">Hozzáférési szint</div><div class="profile-value"><span class="clearance-badge">VEZETŐI</span></div></div><div class="profile-field"><div class="profile-label">Status</div><div class="profile-value">Aktív</div></div><div class="profile-field"><div class="profile-label">Station</div><div class="profile-value">Vespucci Boulevard PD</div></div><div class="profile-field"><div class="profile-label">Telefonszám</div><div class="profile-value">—</div></div><div class="profile-field"><div class="profile-label">Születési dátum</div><div class="profile-value">2000-12-29</div></div><div class="profile-field"><div class="profile-label">Állampolgárság</div><div class="profile-value">Amerikai</div></div><div class="profile-field"><div class="profile-label">Nem</div><div class="profile-value">Férfi</div></div><div class="profile-field"><div class="profile-label">Hobbi</div><div class="profile-value">Weightlifting, Cooking, Philosophy</div></div></div><div class="profile-bio"><div class="profile-motto">„Az éj sötétje nem rejti el a bűnt, csak mélyíti.”</div></div></div></td></tr><tr>
 <td><img alt="Bailey Rae Brady profilkép" class="roster-avatar" src="rae.png"/></td>
 <td class="roster-name"><button class="roster-name-btn" data-person="rae" type="button">Bailey Rae Brady</button></td>
-<td class="roster-role"><span class="rank-wrap"><span class="rank-badge rank-deputy">Deputy</span><span>Deputy Director</span></span></td>
+<td class="roster-role"><span class="rank-wrap"><span class="rank-badge rank-deputy">Helyettes</span></span></td>
 <td><span class="dept-iob">IOB</span></td>
-<td><span class="status-active">Active</span></td>
-</tr><tr class="roster-detail" data-person-detail="rae" hidden=""><td colspan="5"><div aria-label="Bailey Rae Brady profil" class="profile-card" role="region"><div class="profile-top"><img alt="Bailey Rae Brady portré" class="profile-avatar" src="rae.png"/><div class="profile-meta"><div class="profile-name">Bailey Rae Brady</div><div class="profile-role">Deputy Director</div><div class="profile-chips"><span class="chip chip-dept">IOB</span><span class="chip chip-status">Active</span></div></div></div><div class="profile-grid"><div class="profile-field"><div class="profile-label">Rank/Position</div><div class="profile-value">Deputy Director</div></div><div class="profile-field"><div class="profile-label">Department</div><div class="profile-value">IOB</div></div><div class="profile-field"><div class="profile-label">Clearance Level</div><div class="profile-value"><span class="clearance-badge">DIRECTORIAL</span></div></div><div class="profile-field"><div class="profile-label">Status</div><div class="profile-value">Active</div></div><div class="profile-field"><div class="profile-label">Station</div><div class="profile-value">Vespucci Boulevard PD</div></div><div class="profile-field"><div class="profile-label">Phone Number</div><div class="profile-value">—</div></div><div class="profile-field"><div class="profile-label">Date of Birth</div><div class="profile-value">1990-09-19</div></div><div class="profile-field"><div class="profile-label">Nationality</div><div class="profile-value">American</div></div><div class="profile-field"><div class="profile-label">Gender</div><div class="profile-value">Female</div></div><div class="profile-field"><div class="profile-label">Hobby</div><div class="profile-value">—</div></div></div><div class="profile-bio">Operatív irányítás, aktív ügyek koordinálása, investigatorok munkájának felügyelete.</div></div></td></tr></tbody>
+<td><span class="status-active">Aktív</span></td>
+</tr><tr class="roster-detail" data-person-detail="rae" hidden=""><td colspan="5"><div aria-label="Bailey Rae Brady profil" class="profile-card" role="region"><div class="profile-top"><img alt="Bailey Rae Brady portré" class="profile-avatar" src="rae.png"/><div class="profile-meta"><div class="profile-name">Bailey Rae Brady</div><div class="profile-role">Igazgatóhelyettes</div><div class="profile-chips"><span class="chip chip-dept">IOB</span><span class="chip chip-status">Aktív</span></div></div></div><div class="profile-grid"><div class="profile-field"><div class="profile-label">Beosztás</div><div class="profile-value">Igazgatóhelyettes</div></div><div class="profile-field"><div class="profile-label">Részleg</div><div class="profile-value">IOB</div></div><div class="profile-field"><div class="profile-label">Hozzáférési szint</div><div class="profile-value"><span class="clearance-badge">IGAZGATÓI</span></div></div><div class="profile-field"><div class="profile-label">Status</div><div class="profile-value">Aktív</div></div><div class="profile-field"><div class="profile-label">Station</div><div class="profile-value">Vespucci Boulevard PD</div></div><div class="profile-field"><div class="profile-label">Telefonszám</div><div class="profile-value">—</div></div><div class="profile-field"><div class="profile-label">Születési dátum</div><div class="profile-value">1990-09-19</div></div><div class="profile-field"><div class="profile-label">Állampolgárság</div><div class="profile-value">Amerikai</div></div><div class="profile-field"><div class="profile-label">Nem</div><div class="profile-value">Female</div></div><div class="profile-field"><div class="profile-label">Hobbi</div><div class="profile-value">—</div></div></div><div class="profile-bio">Operatív irányítás, aktív ügyek koordinálása, investigatorok munkájának felügyelete.</div></div></td></tr></tbody>
 </table>
 </div>
 </div>
