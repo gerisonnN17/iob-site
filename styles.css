@@ -2169,3 +2169,14 @@ mark.current{outline:2px solid var(--doj-accent);}
   .topnav-inner{ gap: 8px; }
   .navbtn{ padding: 9px 12px !important; font-size: 13px !important; }
 }
+
+
+/* ======================================= */
+/*   FIX: Anchor scroll offset (sticky)    */
+/* ======================================= */
+
+/* Minden olyan szekció, amire #anchor ugrik */
+#page-home [id],
+#page-ismerteto [id]{
+  scroll-margin-top: 140px; /* igazítsd ha kell */
+}
