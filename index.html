@@ -1851,6 +1851,114 @@ mark.current{outline:2px solid var(--doj-accent);}
   color: inherit !important;
 }
 
+
+
+
+/* =============================== */
+/*     SIDEBAR TOC (ALT / CLEAN)   */
+/* =============================== */
+.sidebar h3{
+  margin-top:0;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.sidebar h3::before{
+  content:"";
+  width:10px;
+  height:10px;
+  border-radius:3px;
+  background: rgba(0,94,162,.20);
+  border: 1px solid rgba(0,94,162,.25);
+}
+
+.sidebar .toc{
+  margin-top: 12px;
+  display:flex;
+  flex-direction:column;
+  gap: 8px;
+}
+
+.sidebar .toc a.toc-link{
+  display:flex;
+  align-items:flex-start;
+  gap: 10px;
+  padding: 10px 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(0,0,0,.10);
+  background: #ffffff;
+  text-decoration:none;
+  transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+}
+
+.sidebar .toc a.toc-link:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(0,0,0,.08);
+  border-color: rgba(0,94,162,.25);
+}
+
+.sidebar .toc a.toc-link.is-active{
+  border-color: rgba(0,94,162,.35);
+  box-shadow: 0 10px 22px rgba(0,94,162,.10);
+  position: relative;
+}
+
+.sidebar .toc a.toc-link.is-active::before{
+  content:"";
+  position:absolute;
+  left:-1px;
+  top:-1px;
+  bottom:-1px;
+  width:4px;
+  border-radius: 12px 0 0 12px;
+  background: var(--doj-accent);
+}
+
+.sidebar .toc-num{
+  width: 26px;
+  height: 26px;
+  border-radius: 10px;
+  display:grid;
+  place-items:center;
+  font-size: 12px;
+  font-weight: 900;
+  color: #102a43;
+  background: rgba(16,42,67,.06);
+  border: 1px solid rgba(16,42,67,.12);
+  flex: 0 0 26px;
+  margin-top: 1px;
+}
+
+.sidebar .toc-text{
+  display:flex;
+  flex-direction:column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.sidebar .toc-label{
+  font-size: 14px;
+  font-weight: 900;
+  color:#102a43;
+  line-height: 1.2;
+}
+
+.sidebar .toc-sub{
+  font-size: 12px;
+  color: rgba(16,42,67,.70);
+  line-height: 1.25;
+}
+
+
+/* =============================== */
+/*  FIX: ISMERTETŐ SCROLL / STICKY */
+/* =============================== */
+#page-ismerteto .sidebar{
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
 </style>
 </head>
 <body>
@@ -1881,11 +1989,13 @@ mark.current{outline:2px solid var(--doj-accent);}
 <div class="main">
 <div class="sidebar">
 <h3>Tartalom</h3>
-<a href="#info-miert">1. Mi az IOB?</a>
-<a href="#info-mukodes">2. Hogyan működik?</a>
-<a href="#info-jogok">3. Jogok és kötelezettségek</a>
-<a href="#info-gyik">4. GYIK</a>
-<a href="#info-kapcsolat">5. Kapcsolat</a>
+<nav class="toc" aria-label="Tartalomjegyzék">
+<a href="#info-miert" class="toc-link"><span class="toc-num">1</span><span class="toc-text"><span class="toc-label">Mi az IOB?</span><span class="toc-sub">Hatáskör, illetékesség, feladatkör.</span></span></a>
+<a href="#info-mukodes" class="toc-link"><span class="toc-num">2</span><span class="toc-text"><span class="toc-label">Hogyan működik?</span><span class="toc-sub">Folyamat, szerepkörök, működés.</span></span></a>
+<a href="#info-jogok" class="toc-link"><span class="toc-num">3</span><span class="toc-text"><span class="toc-label">Jogok és kötelezettségek</span><span class="toc-sub">Jogok, kötelezettségek, garanciák.</span></span></a>
+<a href="#info-gyik" class="toc-link"><span class="toc-num">4</span><span class="toc-text"><span class="toc-label">GYIK</span><span class="toc-sub">Gyakori kérdések, rövid válaszok.</span></span></a>
+<a href="#info-kapcsolat" class="toc-link"><span class="toc-num">5</span><span class="toc-text"><span class="toc-label">Kapcsolat</span><span class="toc-sub">Kapcsolati csatornák és bejelentés.</span></span></a>
+</nav>
 </div>
 <div class="content">
 <div aria-label="Oldal információ" class="meta">
@@ -1942,16 +2052,18 @@ mark.current{outline:2px solid var(--doj-accent);}
 </div>
 </div>
 <h3>Tartalom</h3>
-<a href="#hatoskor">I. Hatáskör</a>
-<a href="#eljarasrend">II. Eljárásrend</a>
-<a href="#alapelvek">III. Alapelvek</a>
-<a href="#szervezet">IV. Szervezeti felépítés</a>
-<a href="#vizsgalat">V. Vizsgálati folyamat</a>
-<a href="#fegyelmi">VI. Fegyelmi intézkedések</a>
-<a href="#fellebbezes">VII. Fellebbezés</a>
-<a href="#sablonok">VIII. Dokumentum sablonok</a>
-<a href="#titoktartas">IX. Titoktartás</a>
-<a href="#nyilvanossag">X. Nyilvánosság</a>
+<nav class="toc" aria-label="Ismertető tartalomjegyzék">
+<a href="#hatoskor" class="toc-link"><span class="toc-num">I</span><span class="toc-text"><span class="toc-label">Hatáskör</span><span class="toc-sub">Illetékesség, ügykörök, jogosultságok.</span></span></a>
+<a href="#eljarasrend" class="toc-link"><span class="toc-num">II</span><span class="toc-text"><span class="toc-label">Eljárásrend</span><span class="toc-sub">Indítás, lefolytatás, dokumentálás.</span></span></a>
+<a href="#alapelvek" class="toc-link"><span class="toc-num">III</span><span class="toc-text"><span class="toc-label">Alapelvek</span><span class="toc-sub">Pártatlanság, titoktartás, jogkövetés.</span></span></a>
+<a href="#szervezet" class="toc-link"><span class="toc-num">IV</span><span class="toc-text"><span class="toc-label">Szervezeti felépítés</span><span class="toc-sub">Rangstruktúra és felelősségi körök.</span></span></a>
+<a href="#vizsgalat" class="toc-link"><span class="toc-num">V</span><span class="toc-text"><span class="toc-label">Vizsgálati folyamat</span><span class="toc-sub">Lépések, meghallgatások, zárás.</span></span></a>
+<a href="#fegyelmi" class="toc-link"><span class="toc-num">VI</span><span class="toc-text"><span class="toc-label">Fegyelmi intézkedések</span><span class="toc-sub">Lehetséges intézkedések és javaslatok.</span></span></a>
+<a href="#fellebbezes" class="toc-link"><span class="toc-num">VII</span><span class="toc-text"><span class="toc-label">Fellebbezés</span><span class="toc-sub">Felülvizsgálati rend, parancsnoki út.</span></span></a>
+<a href="#sablonok" class="toc-link"><span class="toc-num">VIII</span><span class="toc-text"><span class="toc-label">Dokumentum sablonok</span><span class="toc-sub">Űrlapok, jegyzőkönyv, jelentés sablonok.</span></span></a>
+<a href="#titoktartas" class="toc-link"><span class="toc-num">IX</span><span class="toc-text"><span class="toc-label">Titoktartás</span><span class="toc-sub">Bizalmas kezelés, összeférhetetlenség.</span></span></a>
+<a href="#nyilvanossag" class="toc-link"><span class="toc-num">X</span><span class="toc-text"><span class="toc-label">Nyilvánosság</span><span class="toc-sub">Kiadás, anonimizálás, kivonatolás.</span></span></a>
+</nav>
 </div>
 <div class="content" id="infoContent">
 <div aria-label="Oldal információ" class="meta">
@@ -3140,6 +3252,85 @@ function detailHTML(c){
     }catch(e){}
   }
   window.addEventListener("load", updateHomeStats);
+
+
+
+
+/* =============================== */
+/*   TOC ACTIVE (ALT / CLEAN)      */
+/* =============================== */
+(function(){
+  const toc = document.querySelector('#page-home .sidebar .toc');
+  if(!toc) return;
+
+  const links = Array.from(toc.querySelectorAll('a.toc-link'));
+  const map = new Map();
+  links.forEach(a => {
+    const h = (a.getAttribute('href') || '').trim();
+    if(h.startsWith('#')) map.set(h.slice(1), a);
+  });
+
+  const setActive = (id) => {
+    links.forEach(a => a.classList.remove('is-active'));
+    const a = map.get(id);
+    if(a) a.classList.add('is-active');
+  };
+
+  const targets = Array.from(map.keys()).map(id => document.getElementById(id)).filter(Boolean);
+
+  const obs = new IntersectionObserver((entries) => {
+    const vis = entries.filter(e => e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio);
+    if(vis[0]) setActive(vis[0].target.id);
+  }, { threshold:[0.25,0.5,0.65], rootMargin:"-20% 0px -65% 0px" });
+
+  targets.forEach(t => obs.observe(t));
+  if(targets[0]) setActive(targets[0].id);
+
+  links.forEach(a => a.addEventListener('click', () => {
+    const h = a.getAttribute('href');
+    if(h && h.startsWith('#')) setActive(h.slice(1));
+  }));
+})();
+
+
+
+/* =============================== */
+/*   TOC ACTIVE (ALT / CLEAN)      */
+/*   Ismertető                     */
+/* =============================== */
+(function(){
+  const toc = document.querySelector('#page-ismerteto .sidebar .toc');
+  if(!toc) return;
+
+  const links = Array.from(toc.querySelectorAll('a.toc-link'));
+  const map = new Map();
+  links.forEach(a => {
+    const h = (a.getAttribute('href') || '').trim();
+    if(h.startsWith('#')) map.set(h.slice(1), a);
+  });
+
+  const setActive = (id) => {
+    links.forEach(a => a.classList.remove('is-active'));
+    const a = map.get(id);
+    if(a) a.classList.add('is-active');
+  };
+
+  const targets = Array.from(map.keys()).map(id => document.getElementById(id)).filter(Boolean);
+
+  const obs = new IntersectionObserver((entries) => {
+    const vis = entries.filter(e => e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio);
+    if(vis[0]) setActive(vis[0].target.id);
+  }, { threshold:[0.25,0.5,0.65], rootMargin:"-20% 0px -65% 0px" });
+
+  targets.forEach(t => obs.observe(t));
+  if(targets[0]) setActive(targets[0].id);
+
+  links.forEach(a => a.addEventListener('click', () => {
+    const h = a.getAttribute('href');
+    if(h && h.startsWith('#')) setActive(h.slice(1));
+  }));
+})();
+
 </script>
 
   <!-- === KIVONAT MODAL (Public Summary) === -->
